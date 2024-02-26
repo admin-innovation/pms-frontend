@@ -4,9 +4,11 @@ import Nav from "./Nav";
 
 const Layout = ({ children }) => {
   return (
-    <div className="bg-[#F1F4F9] h-[100vh] p-[40px] flex">
+    <div className="bg-[#F1F4F9] h-[100vh] p-[40px] flex flex-row gap-[30px] w-[100vw] relative">
       <Nav />
-      <Outlet />
+      <div className="w-full">
+        <Outlet />
+      </div>
     </div>
   );
 };
