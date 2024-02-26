@@ -10,19 +10,19 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 const Nav = () => {
   const activeLink =
-    "text-[#205BB1] bg-[#1D53A117]  w-full h-[40px] shadow-lg shadow-[black]/10   flex  rounded-[10px]";
+    "text-[#205BB1] bg-[#1D53A117]  w-full h-[40px] shadow-lg shadow-[black]/10 font-medium   flex  rounded-[10px]";
   const normal = "w-full   hover:bg-[";
   return (
     <div className="relative w-[303px] h-[90vh] bg-[white] rounded-[20px] flex flex-col items-center">
       <img src={logo} className="relative mt-[30px]" />
-      <div className="flex flex-col w-full px-[20px] text-black gap-5 mt-[40px] ml-[40px]">
+      <div className="flex flex-col w-full px-[20px] text-black gap-5 mt-[40px] ">
         <NavLink
           to="/home"
           className={({ isActive, isPending }) =>
             isActive ? activeLink : normal
           }
         >
-          <span className="flex gap-3 w-full items-center">
+          <span className="flex gap-3 w-full items-center pl-[10px]">
             <LuLayoutDashboard />
             <span>Dashboard</span>
           </span>
@@ -33,7 +33,7 @@ const Nav = () => {
             isActive ? activeLink : normal
           }
         >
-          <span className="flex gap-3 w-full items-center">
+          <span className="flex gap-3 w-full items-center pl-[10px]">
             <GoBriefcase />
             <span>Departments</span>
           </span>
@@ -44,7 +44,7 @@ const Nav = () => {
             isActive ? activeLink : normal
           }
         >
-          <span className="flex gap-3 w-full items-center">
+          <span className="flex gap-3 w-full items-center pl-[10px]">
             <IoMdAnalytics />
             <span>Analytics</span>
           </span>
@@ -55,7 +55,7 @@ const Nav = () => {
             isActive ? activeLink : normal
           }
         >
-          <span className="flex gap-3 w-full items-center">
+          <span className="flex gap-3 w-full items-center pl-[10px]">
             <MdChecklist />
 
             <span>Goals</span>
