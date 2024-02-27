@@ -19,6 +19,9 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="goals" element={<Goals />} />
           <Route path="*" element={<Error />} />
+          
+
+      
         </Route>
       </Routes>
     </BrowserRouter>
