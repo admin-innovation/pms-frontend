@@ -4,6 +4,9 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoMdMore } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { CircularProgress } from "@nextui-org/react";
+import { IoMdAddCircle } from "react-icons/io";
+
+import ChartTasks from "../components/Chart";
 
 const Home = () => {
   const User = {
@@ -74,10 +77,85 @@ const Home = () => {
         </div>
         <div className="w-[500px] h-[160px] bg-white rounded-[8px]"></div>
       </div>
-      <div className="w-full flex mt-[1.5rem] ">
-        <div className="w-[650px] h-[600px] bg-white rounded-[8px]"></div>
+      <div className="w-full flex mt-[1rem] gap-4 ">
+        <div className="w-[600px]  bg-white rounded-[8px] flex flex-col p-[20px]">
+          <div className="w-full flex justify-between">
+            <p className="text-[16px] font-[700]">Analytics Per Department</p>
+            <div className="flex gap-4">
+              <div className="w-[80px] h-[30px] text-center rounded-[4px] bg-[#6A91CB24]">
+                This week
+              </div>
+
+              <div className="w-[57px] h-[30px] border-[1px] border-[#17417E] rounded-[4px] text-center cursor-pointer">
+                Filter
+              </div>
+            </div>
+          </div>
+
+          <div className="flex w-full items-center justify-center mt-[1rem] flex-col gap-[1rem]">
+            <div className="w-[70%] h-[30px] flex bg-[white] border-[1px] border-[#6A91CB] items-center rounded-[30px] ">
+              <span className="text-[20px] pl-[20px] pr-[5px] text-slate-400">
+                <CiSearch />
+              </span>
+
+              <input
+                className="decorations-none no-underline outline-none w-full rounded-[30px]"
+                placeholder="Facility"
+              />
+            </div>
+            <div className="w-[70%] flex justify-between">
+              <p className="text-[18px] font-[700]">
+                HOD:{" "}
+                <span className="text-[13px] font-[300]">Adoyiza Daniel</span>
+              </p>
+              <p className="text-[18px] font-[700]">
+                No. of Staff: <span className="text-[13px] font-[300]">15</span>
+              </p>
+            </div>
+          </div>
+          <ChartTasks />
+        </div>
+        <div className="bg-[white] w-[600px] h-[260px] rounded-[8px]">
+          <div className="flex w-full justify-between p-[20px]">
+            <p className="font-[700] text-[16px]">Goals Window</p>
+            <div className="bg-[#4D7CC1] rounded-[4px] text-white flex items-center px-[10px] py-[5px] gap-3 cursor-pointer hover:bg-[#5c83be]">
+              <IoMdAddCircle className="text-[25px]" />{" "}
+              <span>Create new Goal</span>
+            </div>
+          </div>
+          <div className="px-[20px] w-full flex flex-col gap-5">
+            <GoalCheckBox
+              title="Assign HR to schedule performance review for all departments"
+              checked
+            />
+            <GoalCheckBox
+              title="Task HR to oversee the onboarding process for new employees"
+              checked
+            />
+            <GoalCheckBox
+              title="Task HR to oversee the onboarding process for new employees"
+              checked
+            />
+            <GoalCheckBox
+              title="Develop and implement a training program for employee skill enh..."
+              checked={false}
+            />
+          </div>
+        </div>
       </div>
       <div></div>
+    </div>
+  );
+};
+const GoalCheckBox = ({ checked, title }) => {
+  return (
+    <div className="flex w-full items-center justify-between">
+      <label className=" flex items-center">
+        <input className="w-[33px]" type="checkbox" checked={checked} />
+        <span className="text-[13px] font-[500]">{title}</span>
+      </label>
+
+      <span className="text-[9px] font-[300]">29th March</span>
     </div>
   );
 };
@@ -96,19 +174,6 @@ const GoalMeter = ({ id, status }) => {
       strokeWidth={20}
       showValueLabel={true}
     />
-    // <div className="w-[70px] h-[70px] rounded-full border-[10px] border-[#E9EFF7] border-solid box-border relative flex items-center justify-center">
-    //   <div className="flex flex-col text-[12px] font-[600] items-center justify-center w-full ">
-    //     <p>#1</p>
-    //     <p>Goal</p>
-    //   </div>
-
-    // {/* <div
-    //   className="absolute  w-[70px] h-[70px] rounded-full border-[10px] border-[#4D7CC1] border-solid box-border"
-    //   style={{
-    //     clipPath: `inset(0 ${100 - status}% 0 0)`,
-    //   }}
-    // ></div> */}
-    // </div>
   );
 };
 
