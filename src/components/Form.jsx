@@ -2,37 +2,42 @@
 import * as React from "react";
 const Form=()=>{
     return(
-        <div>
+        <div className="h-[565px] w-[554px] bg-white px-10 py-20 rounded-3xl border-[1.5px] border-black">
            <h1 className="text-4xl font-semibold">Sign In To Your Account</h1>
            <p className="font-medium text-lg text-gray-500 mt-4">Enter Your Credentials used in Anomis</p>
            <div className="mt-8 ">
                 <div>
                     <label className="text-lg font-medium">Staff ID</label>
                     <input 
-                        className="w-full border-[2px] border-gray-100"
+                        className="w-full border-[2px] border-gray-100 rounded-xl p-[4px] mt-[1px] bg-transparent"
                         placeholder="Staff ID"
                         
                     />
                 </div>
                 <div>
-                    <label>Password</label>
+                    <label className="text-lg font-medium">Password</label>
                     <input 
-                        className=""
+                        className="w-full border-[2px] border-gray-100 rounded-xl p-[4px] mt-[1px] bg-transparent"
                         placeholder="Password"
                         type="password"
                     />
                 
                 </div>
-                <div>
+                <div className="mt-8 flex justify-between items-center">
                     <div>
                         <input 
                             type="checkbox"
                             id="remeber"
                         />
-                        <label itemID="remeber">Remember Me</label>
+                        <label className="ml-2 font-medium text-base" itemID="remeber">Remember Me</label>
                     </div>
-                    <button>Forgot Password</button>
+                    <button className="font-medium text-base text-blue-400">Forgot Password</button>
+                    
                 </div>
+                <div className="mt-8 flex flex-col gap-y-4 ">
+                    <button className="active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out py-3 rounded-xl h-[53px] bg-blue-400 text-white text-lg font-bold">Login</button>
+                </div>
+                
            </div>
         </div>
     )
