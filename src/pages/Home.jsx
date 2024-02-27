@@ -5,8 +5,10 @@ import { IoMdMore } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
+import { useState } from "react";
 
 import ChartTasks from "../components/Chart";
+import GoalForm from "../components/GoalForm";
 
 const Home = () => {
   const User = {
@@ -14,8 +16,16 @@ const Home = () => {
     profile_picture: "/joe.jpg",
   };
   const percentage = 70;
+  const [goalform, setGoalForm] = useState(false);
+  const handleAddGoal = (e) => {
+    setGoalForm(true);
+  };
+  const closeGoalForm = () => {
+    setGoalForm(false);
+  };
   return (
     <div className="w-full flex flex-col">
+      {goalform && <GoalForm close={closeGoalForm} />}
       <div className="w-full flex justify-between">
         <p className="text-[20px] font-[700]">Welcome Back, {User.name}</p>
         <div className="w-[40%] h-[30px] flex bg-[white] items-center rounded-[30px] ">
@@ -118,7 +128,10 @@ const Home = () => {
         <div className="bg-[white] w-[600px] h-[260px] rounded-[8px]">
           <div className="flex w-full justify-between p-[20px]">
             <p className="font-[700] text-[16px]">Goals Window</p>
-            <div className="bg-[#4D7CC1] rounded-[4px] text-white flex items-center px-[10px] py-[5px] gap-3 cursor-pointer hover:bg-[#5c83be]">
+            <div
+              className="bg-[#4D7CC1] rounded-[4px] text-white flex items-center px-[10px] py-[5px] gap-3 cursor-pointer hover:bg-[#072b61]"
+              onClick={handleAddGoal}
+            >
               <IoMdAddCircle className="text-[25px]" />{" "}
               <span>Create new Goal</span>
             </div>

@@ -15,63 +15,65 @@ const Nav = () => {
   return (
     <div className="relative w-[303px] h-[90vh] bg-[white] rounded-[20px] flex flex-col items-center">
       <img src={logo} className="relative mt-[30px]" />
-      <div className="flex flex-col w-full px-[20px] text-black gap-5 mt-[40px] ">
-        <NavLink
-          to="/dashboard"
-          className={({ isActive, isPending }) =>
-            isActive ? activeLink : normal
-          }
-        >
-          <span className="flex gap-3 w-full items-center pl-[10px]">
-            <LuLayoutDashboard />
-            <span>Dashboard</span>
-          </span>
-        </NavLink>
-        <NavLink
-          to="departments"
-          className={({ isActive, isPending }) =>
-            isActive ? activeLink : normal
-          }
-        >
-          <span className="flex gap-3 w-full items-center pl-[10px]">
-            <GoBriefcase />
-            <span>Departments</span>
-          </span>
-        </NavLink>
-        <NavLink
-          to="analytics"
-          className={({ isActive, isPending }) =>
-            isActive ? activeLink : normal
-          }
-        >
-          <span className="flex gap-3 w-full items-center pl-[10px]">
-            <IoMdAnalytics />
-            <span>Analytics</span>
-          </span>
-        </NavLink>
-        <NavLink
-          to="goals"
-          className={({ isActive, isPending }) =>
-            isActive ? activeLink : normal
-          }
-        >
-          <span className="flex gap-3 w-full items-center pl-[10px]">
-            <MdChecklist />
+      <div className="flex flex-col w-full px-[20px] text-black gap-5 mt-[40px] justify-between h-full ">
+        <div className="flex flex-col w-full px-[20px] text-black gap-5 ">
+          <NavLink
+            to="/dashboard"
+            className={({ isActive, isPending }) =>
+              isActive ? activeLink : normal
+            }
+          >
+            <span className="flex gap-3 w-full items-center pl-[10px]">
+              <LuLayoutDashboard />
+              <span>Dashboard</span>
+            </span>
+          </NavLink>
+          <NavLink
+            to="departments"
+            className={({ isActive, isPending }) =>
+              isActive ? activeLink : normal
+            }
+          >
+            <span className="flex gap-3 w-full items-center pl-[10px]">
+              <GoBriefcase />
+              <span>Departments</span>
+            </span>
+          </NavLink>
+          <NavLink
+            to="analytics"
+            className={({ isActive, isPending }) =>
+              isActive ? activeLink : normal
+            }
+          >
+            <span className="flex gap-3 w-full items-center pl-[10px]">
+              <IoMdAnalytics />
+              <span>Analytics</span>
+            </span>
+          </NavLink>
+          <NavLink
+            to="goals"
+            className={({ isActive, isPending }) =>
+              isActive ? activeLink : normal
+            }
+          >
+            <span className="flex gap-3 w-full items-center pl-[10px]">
+              <MdChecklist />
 
-            <span>Goals</span>
-          </span>
-        </NavLink>
-      </div>
-      <div className="flex flex-col w-full px-[20px] gap-4 mt-[110%] ">
-        <div className="flex gap-3 w-full items-center pl-[10px]  ">
-          <IoSettingsOutline />
-          Settings
+              <span>Goals</span>
+            </span>
+          </NavLink>
         </div>
-        <div className="w-full border-solid border-[2px] border-[#4D7CC1] h-[40px] text-[#4D7CC1] rounded-[10px] flex items-center pl-[10px] gap-4 ">
-          <span className="text-[30px]">
-            <IoLogOutOutline />
-          </span>
-          Logout
+        <div className="flex flex-col w-full px-[20px] gap-4 pb-[30px] ">
+          <div className="flex gap-3 w-full items-center pl-[10px]  ">
+            <IoSettingsOutline />
+            Settings
+          </div>
+          <div className="w-full border-solid border-[2px] border-[#4D7CC1] h-[40px] text-[#4D7CC1] rounded-[10px] flex items-center pl-[10px] gap-4 ">
+            <span className="text-[30px]">
+              <IoLogOutOutline />
+            </span>
+            Logout
+          </div>
         </div>
       </div>
     </div>
