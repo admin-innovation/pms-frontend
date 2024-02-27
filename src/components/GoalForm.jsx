@@ -73,7 +73,7 @@ const GoalForm = ({ close, addGoal }) => {
             </div>
             <div
               onClick={() => {
-                addGoal();
+                handleAddGoal();
               }}
               className="w-[77px] h-[30px] bg-[#4D7CC1] text-center text-white rounded-[4px] text-[12px] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#062b61]"
             >

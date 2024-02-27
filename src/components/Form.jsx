@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
+import { useNavigate } from "react-router";
 const Form = () => {
+  const navigate = useNavigate();
   return (
     <div className="h-[565px] w-[554px] bg-white  rounded-3xl border-[1.5px] border-black p-[30px] ">
       <h1 className="text-4xl font-semibold">Sign In To Your Account</h1>
@@ -35,7 +37,13 @@ const Form = () => {
           </button>
         </div>
         <div className="mt-8 flex flex-col gap-y-4 ">
-          <button className="active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out py-3 rounded-xl h-[53px] bg-blue-400 text-white text-lg font-bold">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/dashboard");
+            }}
+            className="active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out py-3 rounded-xl h-[53px] bg-blue-400 text-white text-lg font-bold"
+          >
             Login
           </button>
         </div>

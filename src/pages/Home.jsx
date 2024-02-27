@@ -128,7 +128,7 @@ const Home = () => {
           </div>
           <ChartTasks />
         </div>
-        <div className="bg-[white] w-[600px] h-[260px] rounded-[8px]">
+        <div className="bg-[white] w-[600px] h-full rounded-[8px]">
           <div className="flex w-full justify-between p-[20px]">
             <p className="font-[700] text-[16px]">Goals Window</p>
             <div
@@ -140,7 +140,7 @@ const Home = () => {
             </div>
           </div>
           <div className="px-[20px] w-full flex flex-col gap-5">
-            {goals.map((item, key) => {
+            {goalsList.map((item, key) => {
               return (
                 <GoalCheckBox title={item.title} checked={item.achieved} />
               );
