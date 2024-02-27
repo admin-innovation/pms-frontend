@@ -17,7 +17,7 @@ const Nav = () => {
       <img src={logo} className="relative mt-[30px]" />
       <div className="flex flex-col w-full px-[20px] text-black gap-5 mt-[40px] ">
         <NavLink
-          to="/home"
+          to="/dashboard"
           className={({ isActive, isPending }) =>
             isActive ? activeLink : normal
           }
@@ -62,7 +62,7 @@ const Nav = () => {
           </span>
         </NavLink>
       </div>
-      <div className="flex flex-col w-full px-[20px] gap-4 mt-[80%] ">
+      <div className="flex flex-col w-full px-[20px] gap-4 mt-[110%] ">
         <div className="flex gap-3 w-full items-center pl-[10px]  ">
           <IoSettingsOutline />
           Settings
