@@ -6,11 +6,13 @@ import { GoDotFill } from "react-icons/go";
 import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
 import { useState } from "react";
+import { goals } from "../data/temp";
 
 import ChartTasks from "../components/Chart";
 import GoalForm from "../components/GoalForm";
 
 const Home = () => {
+  const [goalsList, setGoals] = useState([...goals]);
   const User = {
     name: "Joe",
     profile_picture: "/joe.jpg",
@@ -25,7 +27,7 @@ const Home = () => {
   };
   return (
     <div className="w-full flex flex-col">
-      {goalform && <GoalForm close={closeGoalForm} />}
+      {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
       <div className="w-full flex justify-between">
         <p className="text-[20px] font-[700]">Welcome Back, {User.name}</p>
         <div className="w-[40%] h-[30px] flex bg-[white] items-center rounded-[30px] ">
@@ -61,6 +63,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <div className="w-full gap-4  mt-[10px] flex">
         <div className="flex bg-white h-[160px] w-[700px] rounded-[8px] items-center p-[30px] gap-6 ">
           <div className="flex flex-col gap-4">
@@ -137,22 +140,11 @@ const Home = () => {
             </div>
           </div>
           <div className="px-[20px] w-full flex flex-col gap-5">
-            <GoalCheckBox
-              title="Assign HR to schedule performance review for all departments"
-              checked
-            />
-            <GoalCheckBox
-              title="Task HR to oversee the onboarding process for new employees"
-              checked
-            />
-            <GoalCheckBox
-              title="Task HR to oversee the onboarding process for new employees"
-              checked
-            />
-            <GoalCheckBox
-              title="Develop and implement a training program for employee skill enh..."
-              checked={false}
-            />
+            {goals.map((item, key) => {
+              return (
+                <GoalCheckBox title={item.title} checked={item.achieved} />
+              );
+            })}
           </div>
         </div>
       </div>
