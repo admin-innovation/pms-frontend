@@ -1,22 +1,18 @@
 import React from "react";
 import { CiSearch } from "react-icons/ci";
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { IoMdMore } from "react-icons/io";
-import { GoDotFill } from "react-icons/go";
+
 import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
 import { useState } from "react";
 import { goals } from "../data/temp";
+import Calendar from "react-calendar";
 
 import ChartTasks from "../components/Chart";
 import GoalForm from "../components/GoalForm";
 
 const Home = () => {
   const [goalsList, setGoals] = useState([...goals]);
-  const User = {
-    name: "Joe",
-    profile_picture: "/joe.jpg",
-  };
+
   const percentage = 70;
   const [goalform, setGoalForm] = useState(false);
   const handleAddGoal = (e) => {
@@ -28,41 +24,6 @@ const Home = () => {
   return (
     <div className="w-full flex flex-col">
       {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
-      <div className="w-full flex justify-between">
-        <p className="text-[20px] font-[700]">Welcome Back, {User.name}</p>
-        <div className="w-[40%] h-[30px] flex bg-[white] items-center rounded-[30px] ">
-          <span className="text-[20px] pl-[20px] pr-[5px] text-slate-400">
-            <CiSearch />
-          </span>
-
-          <input
-            className="decorations-none no-underline outline-none w-full rounded-[30px]"
-            placeholder="Search"
-          />
-        </div>
-        <div className="flex items-center">
-          <div className="relative flex">
-            <span className="text-[30px] text-slate-700">
-              <IoIosNotificationsOutline />
-            </span>
-            <span className="text-[red] absolute text-[10px] right-[5px] top-[4px] ">
-              <GoDotFill className="" />
-            </span>
-          </div>
-          <div className="flex bg-[#585959]  py-[5px] px-[20px] items-center rounded-[20px] relative gap-3 h">
-            <img
-              src={User.profile_picture}
-              className="w-[32px] h-[32px] rounded-[60%] object-cover relative right-[15px]"
-            />
-            <span className="text-white font-medium relative right-[20px]">
-              John Doe
-            </span>
-            <span className="text-white font-medium text-[20px]">
-              <IoMdMore />
-            </span>
-          </div>
-        </div>
-      </div>
 
       <div className="w-full gap-4  mt-[10px] flex">
         <div className="flex bg-white h-[160px] w-[700px] rounded-[8px] items-center p-[30px] gap-6 ">
@@ -88,7 +49,9 @@ const Home = () => {
             <GoalMeter status={20} id="Goal 3" />
           </div>
         </div>
-        <div className="w-[500px] h-[160px] bg-white rounded-[8px]"></div>
+        <div className="w-[500px] h-[160px] bg-white rounded-[8px]">
+          <Calendar className="" />
+        </div>
       </div>
       <div className="w-full flex mt-[1rem] gap-4 ">
         <div className="w-[600px]  bg-white rounded-[8px] flex flex-col p-[20px]">
@@ -139,7 +102,7 @@ const Home = () => {
               <span>Create new Goal</span>
             </div>
           </div>
-          <div className="px-[20px] w-full flex flex-col gap-5">
+          <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px]">
             {goalsList.map((item, key) => {
               return (
                 <GoalCheckBox title={item.title} checked={item.achieved} />
@@ -159,8 +122,13 @@ const GoalCheckBox = ({ checked, title }) => {
         <input className="w-[33px]" type="checkbox" checked={checked} />
         <span className="text-[13px] font-[500]">{title}</span>
       </label>
-
-      <span className="text-[9px] font-[300]">29th March</span>
+      {!checked ? (
+        <span className="border-[1px] border-solid border-[#17417E] w-[80px] flex items-center justify-center text-[12px] font-[600] text-[#17417E] py-[3px] rounded-[4px] hover:bg-[#e0ecf2] cursor-pointer">
+          Send to HR
+        </span>
+      ) : (
+        <span className="text-[9px] font-[300]">29th March</span>
+      )}
     </div>
   );
 };
