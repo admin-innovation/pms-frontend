@@ -5,7 +5,7 @@ import Image from "../assets/loginillustration.svg";
 
 const Signin = () => {
   return (
-    <div className="flex w-[100%] h-screen overflow-hidden bg-[white]">
+    <div className="flex w-[100%] h-screen overflow-hidden bg-[white] flex-wrap">
       <div className="w-[50%] flex  items-center justify-center   ">
         <Form />
       </div>

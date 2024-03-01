@@ -1,5 +1,6 @@
 import React from "react";
 import { CiSearch } from "react-icons/ci";
+// import MiniCalendar from "../../horizon-tailwind-react/src/components/calendar/MiniCalendar";
 
 import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
@@ -50,7 +51,7 @@ const Home = () => {
           </div>
         </div>
         <div className="w-[500px] h-[160px] bg-white rounded-[8px]">
-          <Calendar className="" />
+          {/* <MiniCalendar /> */}
         </div>
       </div>
       <div className="w-full flex mt-[1rem] gap-4 ">
