@@ -6,8 +6,8 @@ import { CiSearch } from "react-icons/ci";
 
 const Header = () => {
   const User = {
-    name: "Joe",
-    profile_picture: "/joe.jpg",
+    name: "Samiya",
+    profile_picture: "/samiya.png",
   };
   return (
     <div>
@@ -39,7 +39,7 @@ const Header = () => {
               className="w-[32px] h-[32px] rounded-[60%] object-cover relative right-[15px]"
             />
             <span className="text-white font-medium relative right-[20px]">
-              John Doe
+              Samiya Usman
             </span>
             <span className="text-white font-medium text-[20px]">
               <IoMdMore />

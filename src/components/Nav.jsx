@@ -6,9 +6,11 @@ import { GoBriefcase } from "react-icons/go";
 import { IoMdAnalytics } from "react-icons/io";
 import { MdChecklist } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
 
 const Nav = () => {
+  const navigate = useNavigate();
   const activeLink =
     "text-[#205BB1] bg-[#1D53A117]  w-full h-[40px] shadow-lg shadow-[black]/10 font-medium   flex  rounded-[10px]";
   const normal = "w-full   hover:bg-[";
@@ -68,7 +70,12 @@ const Nav = () => {
             <IoSettingsOutline />
             Settings
           </div>
-          <div className="w-full border-solid border-[2px] border-[#4D7CC1] h-[40px] text-[#4D7CC1] rounded-[10px] flex items-center pl-[10px] gap-4 ">
+          <div
+            onClick={() => {
+              navigate("/signin");
+            }}
+            className="w-full border-solid border-[2px] border-[#4D7CC1] h-[40px] text-[#4D7CC1] rounded-[10px] flex items-center pl-[10px] gap-4 hover:bg-[#e9f0f1] cursor-pointer "
+          >
             <span className="text-[30px]">
               <IoLogOutOutline />
             </span>
