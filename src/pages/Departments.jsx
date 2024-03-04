@@ -43,7 +43,7 @@ const Departments = () => {
 };
 const DepartmentTile =({title, image ,link})=>{
   return(
-    <div className="bg-cover w-[200px] h-[200px] rounded-[6px] text-white font-[700px] flex flex-col justify-end"   style={{backgroundImage:`url("${image}")`}}>
+    <div className="bg-cover w-[220px] h-[220px] rounded-[6px] text-white font-[700px] flex flex-col justify-end"   style={{backgroundImage:`url("${image}")`}}>
         {title}
     </div>
   )
