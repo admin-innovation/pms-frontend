@@ -10,7 +10,7 @@ const Departments = () => {
     </div>
     <div>
 
-      <div className="grid grid-cols-5 gap-x-5 gap-y-2">
+      <div className="grid grid-cols-5 gap-x-2 gap-y-2">
         <DepartmentTile title="Facility" image={Facilities} link=""/>
         <DepartmentTile title="Marketing and Stakeholders Engagement" image={Marketing} link=""/>
         <DepartmentTile title="Network Operation Center" image={Network} link=""/>
@@ -43,7 +43,7 @@ const Departments = () => {
 };
 const DepartmentTile =({title, image ,link})=>{
   return(
-    <div className="bg-cover w-[200px] h-[200px] rounded-[9px] text-white font-[700px] flex flex-col justify-end"   style={{backgroundImage:`url("${image}")`}}>
+    <div className="bg-cover w-[200px] h-[200px] rounded-[6px] text-white font-[700px] flex flex-col justify-end"   style={{backgroundImage:`url("${image}")`}}>
         {title}
     </div>
   )
