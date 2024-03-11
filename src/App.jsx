@@ -7,7 +7,8 @@ import Analytics from "./pages/Analytics";
 import Error from "./pages/Error";
 import Goals from "./pages/Goals";
 import Signin from "./pages/Signin";
-
+import Department from "./components/Department";
+import Settings from "./pages/Settings";
 function App() {
   return (
     <BrowserRouter>
@@ -16,14 +17,12 @@ function App() {
         <Route path="dashboard" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="departments" element={<Departments />} />
-          {/* <Route path="deparments/{pathId}" element={<Department/>}/> */}
-          
+          <Route path="departments/:pathId" element={<Department />} />
+
           <Route path="analytics" element={<Analytics />} />
           <Route path="goals" element={<Goals />} />
+          <Route path="setting" element={<Settings />} />
           <Route path="*" element={<Error />} />
-          
-
-      
         </Route>
       </Routes>
     </BrowserRouter>
