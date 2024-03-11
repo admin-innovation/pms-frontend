@@ -6,21 +6,49 @@ import { IoMdAddCircle } from "react-icons/io";
 // import { NavLink } from "react-router-dom";
 
 const Goals = () => {
-  const [activeView, setActiveView] = useState(null);
+  const [activeView, setActiveView] = useState(1);
+  const handleButtonClick = (buttonName) => {
+    setActiveView(buttonName);
+  };
 
   return (
     <div className=" w-full flex flex-col gap-[10px] ">
       <div className="w-full">
         <p className="font-bold text-[16px]">Organiztional Goals</p>
       </div>
-      <div className="w-full h-[45px]  bg-[white] rounded-[5px] flex justify-between px-[50px] text-center">
-        <button className="text-[#205BB1] text-[16px] font-[700]">
+      <div className="w-full h-[45px]  bg-[white] rounded-[5px] flex  text-center">
+        <button
+          className={`text-[#205BB1] text-[16px] font-[700] flex-1 rounded-[5px] ${
+            activeView === 1
+              ? "bg-[#1D53A117]/10 w-[30%]  relative   shadow-[black]/10"
+              : ""
+          }`}
+          onClick={() => {
+            handleButtonClick(1);
+          }}
+        >
           Short-Term
         </button>
-        <button className="text-[#205BB1] text-[16px] font-[700]">
+        <button
+          className={`text-[#205BB1] text-[16px] font-[700] flex-1  rounded-[5px]  ${
+            activeView === 2
+              ? "bg-[#1D53A117]/10 w-[30%]  relative  shadow-md shadow-[black]/10"
+              : ""
+          }`}
+          onClick={() => {
+            handleButtonClick(2);
+          }}
+        >
           Medium-Term
         </button>
-        <button className="text-[#205BB1] text-[16px] font-[700]">
+        <button
+          className={`text-[#205BB1] text-[16px] font-[700] flex-1  rounded-[5px]  ${
+            activeView === 3 ? "bg-[#1D53A117]/10 shadow-[black]/10" : ""
+          }`}
+          onClick={() => {
+            handleButtonClick(3);
+          }}
+        >
           Long-Term
         </button>
       </div>
