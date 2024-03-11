@@ -1,3 +1,4 @@
 1. The homepage link is empty
 2. The sidebar is not looking good
 3. Checkout the charts
+4. Layout of the website if funky

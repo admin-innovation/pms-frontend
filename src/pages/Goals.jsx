@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { goals } from "../data/temp";
+import { IoMdAddCircle } from "react-icons/io";
 // import { NavLink } from "react-router-dom";
 
 const Goals = () => {
@@ -33,8 +34,16 @@ const Goals = () => {
             />
           );
         })}
+        <div className="w-full flex justify-end px-[40px]">
+          <div
+            className="bg-[#4D7CC1]  rounded-[4px] text-white flex items-center gap-3 cursor-pointer hover:bg-[#072b61] px-[10px] py-[10px]"
+            // onClick={handleAddGoal}
+          >
+            <IoMdAddCircle className="text-[25px]" />{" "}
+            <span>Create new Goal</span>
+          </div>
+        </div>
       </div>
-      {/* <div className="bg-[#4D7CC1] rounded-[4px] text-white flex items-center px-[10px] py-[5px] gap-3 cursor-pointer hover:bg-[#072b61]"></div> */}
     </div>
   );
 };

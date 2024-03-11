@@ -9,7 +9,7 @@ export const  goals =  [
   {
     "title": "Upgrade satellite technology for better performance",
     "status": 0,
-    "achieved": false,
+    "achieved": true,
     "description": "Invest in upgrading satellite technology to enhance performance, reliability, and efficiency.",
     "date_created": "2024-03-10"
   },
