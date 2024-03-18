@@ -12,7 +12,7 @@ const Goals = () => {
   };
 
   return (
-    <div className=" w-full flex flex-col gap-[10px] ">
+    <div className=" w-full flex flex-col gap-[10px] mt-[30px] ">
       <div className="w-full">
         <p className="font-bold text-[16px]">Organiztional Goals</p>
       </div>

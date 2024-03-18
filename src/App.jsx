@@ -17,11 +17,11 @@ function App() {
         <Route path="dashboard" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="departments" element={<Departments />} />
-          <Route path="departments/:pathId" element={<Department />} />
+          <Route path="departments/:department_id" element={<Department />} />
 
           <Route path="analytics" element={<Analytics />} />
           <Route path="goals" element={<Goals />} />
-          <Route path="setting" element={<Settings />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

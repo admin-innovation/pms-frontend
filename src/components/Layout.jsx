@@ -5,11 +5,19 @@ import Nav from "./Nav";
 
 const Layout = ({ children }) => {
   return (
-    <div className="bg-[#F1F4F9] h-[100vh] p-[40px] flex flex-row gap-[1.5rem] w-[100vw] relative">
-      <Nav />
-      <div className="w-full ">
-        <Header />
-        <Outlet />
+    <div className=" bg-[#F1F4F9]   flex flex-row gap-[rem] relative w-full min-h-screen overflow-x-hidden py-[30px]  pl-[20px] pr-[60px]">
+      <div className="relative w-[25%]">
+        <div className="fixed top-[30px]">
+          <Nav />
+        </div>
+      </div>
+      <div className="w-[70%] h-full  relative  flex flex-col items-center justify-center ">
+        <div className="w-[60%] fixed top-[10px]    h-[80px] z-100  ">
+          <Header />
+        </div>
+        <div className="w-full h-full relative flex mt-[40px] ">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

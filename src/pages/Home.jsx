@@ -23,7 +23,7 @@ const Home = () => {
     setGoalForm(false);
   };
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col rounded-[10px] ">
       {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
 
       <div className="w-full gap-4  mt-[10px] flex">
