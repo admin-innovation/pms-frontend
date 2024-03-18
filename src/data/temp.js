@@ -54,6 +54,9 @@ export const user={
   "profile_img": "https://example.com/profile_images/johndoe.jpg"
 }
 
+<<<<<<< HEAD
+
+=======
 export const TopPerformerData={
   name:"John Baptista",
   employee_id:"UI7812Cfda",
@@ -86,3 +89,4 @@ export const Departments = [
 
   }
 ]
+>>>>>>> d055b2c1c0f29ac094ff43eeea956908983c279c
