@@ -16,15 +16,16 @@ import {
   Broadband,
   SatCtrl,
 } from "../assets/index";
+import { useNavigate } from "react-router";
 
 const Departments = () => {
   console.log(Facilities);
   return (
-    <>
-      <div className="w-[1320px] h-[50px] rounded-[8px] font-[700px] bg-[#BACCE7] flex flex-col justify-end">
+    <div className="relative w-full h-full flex flex-col">
+      <div className="relative w-[1320px] h-[50px] rounded-[8px] font-[700px] bg-[#BACCE7] flex flex-col justify-end">
         Directorate of Finance & Administration
       </div>
-      <div className="grid grid-cols-5 gap-x-2 gap-y-2">
+      <div className="relative w-full grid grid-cols-5 gap-y-2 gap-x-[1vw]">
         <DepartmentTile title="Administration" image={Administration} link="" />
         <DepartmentTile title="Finance" image={Finance} link="" />
         <DepartmentTile title="Human Resources" image={HumanR} link="" />
@@ -73,17 +74,26 @@ const Departments = () => {
         <DepartmentTile title="Sales" image={Sales} link="" />
         <DepartmentTile title="Business Office" image={Business} link="" />
       </div>
-    </>
+    </div>
   );
 };
+
 const DepartmentTile = ({ title, image, link }) => {
+  const navigate = useNavigate();
+  const handleDepartment = () => {
+    navigate(`/dashboard/departments/${title}`);
+  };
   return (
     <div
-      className="bg-cover w-[235px] h-[235px] rounded-[6px] text-white font-[700px] flex flex-col justify-end"
+      className="relative bg-cover w-[235px] h-[235px] rounded-[6px] text-white font-[700px] flex flex-col justify-end"
+      onClick={() => {
+        handleDepartment();
+      }}
       style={{ backgroundImage: `url("${image}")` }}
     >
       {title}
     </div>
   );
 };
+
 export default Departments;
