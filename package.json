@@ -15,14 +15,17 @@
     "@nextui-org/react": "^2.2.9",
     "all": "^0.0.0",
     "dependencies": "^0.0.1",
-    "framer-motion": "^11.0.6",
+    "framer-motion": "^11.0.12",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
+    "react-rating-stars-component": "^2.2.0",
     "react-router": "^6.22.1",
-    "react-tailwindcss-datepicker": "^1.6.6"
+    "react-select": "^5.8.0",
+    "react-tailwindcss-datepicker": "^1.6.6",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

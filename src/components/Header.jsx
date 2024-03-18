@@ -3,16 +3,26 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoMdMore } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
+import { user } from "../data/temp";
+import { useState, useEffect, useRef } from "react";
 
 const Header = () => {
   const User = {
     name: "Samiya",
     profile_picture: "/samiya.png",
   };
+  const headerRef = useRef(null);
+  const [blur, setBlur] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      if (window.pageYOffset > "5px") {
+      }
+    });
+  }, []);
   return (
-    <div>
+    <div className="h-full ">
       {" "}
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between  ">
         <p className="text-[20px] font-[700]">Welcome Back, {User.name}</p>
         <div className="w-[40%] h-[30px] flex bg-[white] items-center rounded-[30px] ">
           <span className="text-[20px] pl-[20px] pr-[5px] text-slate-400">

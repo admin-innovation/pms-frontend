@@ -13,7 +13,7 @@ const Nav = () => {
   const navigate = useNavigate();
   const activeLink =
     "text-[#205BB1] bg-[#1D53A117]  w-full h-[40px] shadow-lg shadow-[black]/10 font-medium   flex  rounded-[10px]";
-  const normal = "w-full   hover:bg-[";
+  const normal = "w-full   ";
   return (
     <div className="relative w-[303px] h-[90vh] bg-[white] rounded-[20px] flex flex-col items-center">
       <img src={logo} className="relative mt-[30px]" />
@@ -31,7 +31,7 @@ const Nav = () => {
             </span>
           </NavLink>
           <NavLink
-            to="departments"
+            to="/dashboard/departments"
             className={({ isActive, isPending }) =>
               isActive ? activeLink : normal
             }
@@ -66,9 +66,19 @@ const Nav = () => {
           </NavLink>
         </div>
         <div className="flex flex-col w-full px-[20px] gap-4 pb-[30px] ">
-          <div className="flex gap-3 w-full items-center pl-[10px]  ">
-            <IoSettingsOutline />
-            Settings
+          <div className="flex gap-3 w-full items-center pl-[10px]  cursor-pointer ">
+            <NavLink
+              to="settings"
+              className={({ isActive, isPending }) =>
+                isActive ? activeLink : normal
+              }
+            >
+              <span className="flex gap-3 w-full items-center ">
+                {" "}
+                <IoSettingsOutline />
+                Settings
+              </span>
+            </NavLink>
           </div>
           <div
             onClick={() => {
