@@ -34,7 +34,7 @@ export const  goals =  [
   {
     "title": "Improve satellite data processing and analytics",
     "status": 0,
-    "achieved": false,
+    "achieved": true,
     "description": "Enhance data processing and analytics capabilities to provide more valuable insights from satellite data.",
     "date_created": "2024-03-10",
     "progress":90
@@ -63,6 +63,18 @@ export const TopPerformerData={
   task_done:{count:45},
   task_assigned:{count:200},
   average_mail_check_time: 20
+
+}
+
+export const TopPerformerHR={
+  name:"Grace Mahmood",
+  employee_id:"UI7812Cfda",
+  department:"Innovation",
+  performance_rating:2,
+  peer_rating:5,
+  task_done:{count:100},
+  task_assigned:{count:102},
+  average_mail_check_time: 5
 
 }
 

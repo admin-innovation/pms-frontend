@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef } from "react";
 import Select from "react-select";
-import { TopPerformerData } from "../data/temp";
+import { TopPerformerData, TopPerformerHR } from "../data/temp";
 import { CiSearch } from "react-icons/ci";
 import ChartTasks from "../components/Chart";
 import { CircularProgress } from "@nextui-org/react";
@@ -120,11 +120,13 @@ const Analytics = () => {
         </div>
         <div className=" min-w-[600px]  bg-[white] rounded-[8px]">
           <div className="w-full h-full flex flex-col items-start  gap-6 px-[10px] py-[5px]">
-            <p className="font-bold text-[16px]">Top Performer</p>
+            <p className="font-bold text-[16px]">
+              Top Performer per Department
+            </p>
             <div className="w-full flex justify-between">
               <div className="relative flex items-center gap-3">
                 <img
-                  src="/joe.jpg"
+                  src="/samiya.png"
                   className="w-[80px] h-[80px] rounded-[50%]"
                 />
 
@@ -133,13 +135,13 @@ const Analytics = () => {
                     <span className="font-[600] text-[16px] mr-[3px]">
                       Name:
                     </span>
-                    {TopPerformerData.name}
+                    {TopPerformerHR.name}
                   </p>
                   <p className="text-[14px] ">
                     <span className="font-[600] text-[16px] mr-[3px]">
                       Department:
                     </span>
-                    {TopPerformerData.department}
+                    {TopPerformerHR.department}
                   </p>
                 </div>
               </div>
@@ -149,7 +151,7 @@ const Analytics = () => {
                   <ReactStars
                     count={5}
                     // FIx these stars
-                    value={TopPerformerData.performance_rating}
+                    value={TopPerformerHR.performance_rating}
                     isHalf={true}
                     edit={false}
                     emptyIcon={
@@ -167,7 +169,7 @@ const Analytics = () => {
                   <p className="text-[14px] font-[600]">Average peer Rating:</p>
                   <ReactStars
                     count={5}
-                    value={TopPerformerData.peer_rating}
+                    value={TopPerformerHR.peer_rating}
                     isHalf={true}
                     edit={false}
                     emptyIcon={
@@ -184,17 +186,17 @@ const Analytics = () => {
               <div className="w-full flex flex-row items-center gap-[5px] leading-[normal]">
                 <span className="font-bold">Task completed:</span>
                 <span className="text-sm">
-                  {TopPerformerData.task_done.count}
+                  {TopPerformerHR.task_done.count}
                 </span>
                 <span className="text-xs text-[gray]">out of</span>
                 <span className="text-sm">
-                  {TopPerformerData.task_assigned.count}
+                  {TopPerformerHR.task_assigned.count}
                 </span>
               </div>
               <div>
                 <span className="font-bold">Avergae Mail Check time:</span>
                 <span className="text-[gray] text-sm">
-                  {TopPerformerData.average_mail_check_time} minutes
+                  {TopPerformerHR.average_mail_check_time} minutes
                 </span>
               </div>
             </div>
