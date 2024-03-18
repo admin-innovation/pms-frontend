@@ -9,11 +9,22 @@ import Goals from "./pages/Goals";
 import Signin from "./pages/Signin";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
+import HomeManagement from "./pages/HomeManagement";
 function App() {
+  let host = window.location.host;
+  let protocol = window.location.protocol;
+  let parts = host.split(".");
+  let subdomain = parts[0];
+  console.log(parts);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="signin" element={<Signin />} />
+        {/* {subdomain == "management" ? (
+          <Route index element={<HomeManagement />} />
+        ) : (
+          <Route index element={<Home />} />
+        )} */}
         <Route path="dashboard" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="departments" element={<Departments />} />

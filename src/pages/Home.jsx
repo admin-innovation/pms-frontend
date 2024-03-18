@@ -1,12 +1,9 @@
 import React from "react";
 import { CiSearch } from "react-icons/ci";
-// import MiniCalendar from "../../horizon-tailwind-react/src/components/calendar/MiniCalendar";
-
 import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
 import { useState } from "react";
 import { goals } from "../data/temp";
-import Calendar from "react-calendar";
 
 import ChartTasks from "../components/Chart";
 import GoalForm from "../components/GoalForm";
@@ -27,7 +24,7 @@ const Home = () => {
       {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
 
       <div className="w-full gap-4  mt-[10px] flex">
-        <div className="flex bg-white h-[160px] w-[700px] rounded-[8px] items-center p-[30px] gap-6 ">
+        <div className="flex bg-white h-[160px] w-[px] rounded-[8px] items-center p-[30px] gap-6 ">
           <div className="flex flex-col gap-4">
             <div>
               <p className="text-[16px] font-[700]">Goal Progress</p>
@@ -35,23 +32,23 @@ const Home = () => {
                 Progress of Goal based on tasks of all departments
               </p>
             </div>
-            <div className="relative w-[333px] bg-[#D9D9D9] h-[8px] rounded-full">
+            <div className="relative w-[250px] bg-[#D9D9D9] h-[8px] rounded-full">
               <div
                 className="absolute h-full bg-[#4D7CC1] rounded-full"
                 style={{ width: `${percentage}%` }}
-              ></div>
+              />
             </div>
             <span className="text-[20px] font-[600] ">{percentage}%</span>
           </div>
           <div className="relative w-[1px] h-[128px] bg-[#D9D9D9] rounded-full" />
-          <div className="w-[10vw] flex gap-6 ">
+          <div className="flex gap-6 ">
             <GoalMeter status={80} id="Goal 1" />
             <GoalMeter status={50} id="Goal 2" />
             <GoalMeter status={20} id="Goal 3" />
           </div>
         </div>
-        <div className="w-[500px] h-[160px] bg-white rounded-[8px]">
-          {/* <MiniCalendar /> */}
+        <div className="w-[500px] h-[160px] bg-white rounded-[10px]">
+          <Calendar className="" />
         </div>
       </div>
       <div className="w-full flex mt-[1rem] gap-4 ">
@@ -148,6 +145,55 @@ const GoalMeter = ({ id, status }) => {
       strokeWidth={20}
       showValueLabel={true}
     />
+  );
+};
+
+const Calendar = () => {
+  function getWeekCalendar(date) {
+    const dayOfWeek = date.getDay();
+    const startOfWeek = new Date(date);
+    startOfWeek.setDate(startOfWeek.getDate() - dayOfWeek);
+
+    const calendar = [];
+
+    for (let i = 0; i < 7; i++) {
+      const currentDate = new Date(startOfWeek);
+      currentDate.setDate(currentDate.getDate() + i);
+      calendar.push(currentDate);
+    }
+
+    return calendar;
+  }
+
+  // Example usage
+  const date = new Date();
+  const today = date.getDate();
+  const weekCalendar = getWeekCalendar(date);
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sun"];
+  console.log(weekCalendar);
+  return (
+    <div className="relative flex  items-center justify-center w-full bg-[white] h-full rounded-[10px]">
+      <span className=" absolute text-[16px] font-bold right-3 top-4">
+        {date.getDate()}-{date.getMonth()}-{date.getFullYear()}
+      </span>
+      <div className="relative w-full  flex items-center justify-center">
+        {weekCalendar.map((item, key) => {
+          return (
+            <div
+              className={`transition-all duration-400 ease-in-out w-full h-full py-[10px]  font-[600] cursor-pointer rounded-[8px] flex flex-col text-[15px] items-center justify-center gap-[8px] ${
+                today === item.getDate()
+                  ? "bg-[#E9EFF7] drop-shadow-md"
+                  : "hover: hover:bg-[#f7faff] "
+              } `}
+            >
+              <span className="">{days[item.getDay()]}</span>
+              <span>{item.getDate()}</span>
+              <div className="rounded-full black w-[5px] h-[5px] bg-black" />
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 

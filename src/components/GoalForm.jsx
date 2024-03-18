@@ -17,7 +17,7 @@ const GoalForm = ({ close, addGoal }) => {
     close();
   };
   return (
-    <div className="absolute inset-0 w-[100vw] h-[100vh] bg-[black]/50 z-[100] flex items-center justify-center">
+    <div className="absolute w-screen h-screen bg-[black]/50 z-[100] flex items-center justify-center">
       <form className=" w-[782px] h-[458px] bg-[white] rounded-[8px] p-[20px]">
         <div
           className="w-full flex justify-between items-center"
