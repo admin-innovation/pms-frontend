@@ -81,30 +81,67 @@ export const TopPerformerHR={
 export const TopPerformerPerDepartmentData=[]
 
 
-export const Departments = [
-  {
-    hod_name: "Micheal Dawson",
-    hod_email: "michealdawson@email.com",
-    hod_phone: "+00000000000"
+export const Departments = {
+  "Administration": {
+    "HOD": {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone": "+1234567890",
+      "position": "Head of Administration",
+      "id": "12345",
+      "profile_pic": "joe.jpg"
+    },
+    "employees": [
+      {
+        "name": "Alice Smith",
+        "email": "alice.smith@example.com",
+        "phone": "+1987654321",
+        "position": "Admin Assistant",
+        "id": "54321",
+        "profile_pic": "joe.jpg"
+      },
+      {
+        "name": "Bob Johnson",
+        "email": "bob.johnson@example.com",
+        "phone": "+1122334455",
+        "position": "Admin Officer",
+        "id": "67890",
+        "profile_pic": "joe.jpg"
+      },
+      // Add more employees as needed
+    ],
+    "wall_paper": "default_paper.jpg"
   },
+  "Finance": {
+    "HOD": {
+      "name": "Jane Brown",
+      "email": "jane.brown@example.com",
+      "phone": "+1357924680",
+      "position": "Head of Finance",
+      "id": "54321",
+      "profile_pic": "joe.jpg"
+    },
+    "employees": [
+      {
+        "name": "Ethan Davis",
+        "email": "ethan.davis@example.com",
+        "phone": "+1654327890",
+        "position": "Finance Manager",
+        "id": "34567",
+        "profile_pic": "joe.jpg"
+      },
+      {
+        "name": "Grace Wilson",
+        "email": "grace.wilson@example.com",
+        "phone": "+1765432980",
+        "position": "Finance Officer",
+        "id": "23456",
+        "profile_pic": "/joe.jpg"
+      },
+      // Add more employees as needed
+    ],
+    "wall_paper": "/admin.svg"
+  },
+  // Add more departments as needed
+}
 
-  {
-    staff1_name: "Adoyiza Omuya",
-    staff1_number: "example@email.com",
-    staff1_phone: "080000000",
-    position: "AGM, Team Lead"
-  },
-  {
-    staff2_name: "Ashley Olika",
-    staff2_number: "example@email.com",
-    staff2_phone: "080000000",
-    position: "AGM, Team Lead"
-  },
-  {
-    staff3_name: "Stephen Vem",
-    staff3_number: "example@email.com",
-    staff3_phone: "080000000",
-    position: "AGM, Team Lead"
-  }
-
-]
