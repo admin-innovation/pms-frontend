@@ -83,6 +83,28 @@ export const TopPerformerPerDepartmentData=[]
 
 export const Departments = [
   {
+    hod_name: "Micheal Dawson",
+    hod_email: "michealdawson@email.com",
+    hod_phone: "+00000000000"
+  },
 
+  {
+    staff1_name: "Adoyiza Omuya",
+    staff1_number: "example@email.com",
+    staff1_phone: "080000000",
+    position: "AGM, Team Lead"
+  },
+  {
+    staff2_name: "Ashley Olika",
+    staff2_number: "example@email.com",
+    staff2_phone: "080000000",
+    position: "AGM, Team Lead"
+  },
+  {
+    staff3_name: "Stephen Vem",
+    staff3_number: "example@email.com",
+    staff3_phone: "080000000",
+    position: "AGM, Team Lead"
   }
+
 ]
