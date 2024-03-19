@@ -5,13 +5,14 @@ import Nav from "./Nav";
 
 const Layout = ({ children }) => {
   return (
-    <div className=" bg-[#F1F4F9]   flex flex-row gap-[rem] relative w-full min-h-screen overflow-x-hidden py-[30px]  pl-[20px] pr-[60px]">
+    <div className=" bg-[#F1F4F9]   flex flex-row gap-[rem] relative w-full max-h-screen overflow-x-hidden  py-[30px]  pl-[20px] pr-[60px]">
       <div className="relative w-[25%]">
         <div className="fixed top-[30px]">
           <Nav />
         </div>
       </div>
-      <div className="w-[70%] h-full  relative  flex flex-col items-center justify-center ">
+
+      <div className="w-[78%]  h-full  relative  flex flex-col items-center justify-center ">
         <div className="w-[60%] fixed top-[10px]    h-[80px] z-100  ">
           <Header />
         </div>
