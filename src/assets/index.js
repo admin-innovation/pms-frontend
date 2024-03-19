@@ -13,6 +13,7 @@ import Business from './business office.svg';
 import SatNav from './Sattelite Nav.svg';
 import Broadband from './broadband.svg';
 import SatCtrl from './sattelite ctrl.svg';
+import Bgimage from './bgimage.png';
 
 export {
   Facilities,
@@ -29,5 +30,6 @@ export {
   Business,
   SatNav,
   Broadband,
-  SatCtrl
+  SatCtrl,
+  Bgimage
 };
