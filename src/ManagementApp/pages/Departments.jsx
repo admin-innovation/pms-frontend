@@ -15,7 +15,7 @@ import {
   SatNav,
   Broadband,
   SatCtrl,
-} from "../assets/index";
+} from "../../assets/index";
 import { useNavigate } from "react-router";
 
 const Departments = () => {
@@ -97,7 +97,7 @@ const Departments = () => {
 const DepartmentTile = ({ title, image, link }) => {
   const navigate = useNavigate();
   const handleDepartment = () => {
-    navigate(`/dashboard/departments/${title}`);
+    navigate(`/departments/${title}`);
   };
   return (
     <div

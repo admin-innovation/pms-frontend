@@ -2,6 +2,8 @@ import React from "react";
 import { ImCancelCircle } from "react-icons/im";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useState } from "react";
+import ReactDom from "react-dom";
+import { AnimatePresence, easeInOut, motion } from "framer-motion";
 
 const GoalForm = ({ close, addGoal }) => {
   const [dateValue, setdateValue] = useState({
@@ -16,9 +18,14 @@ const GoalForm = ({ close, addGoal }) => {
     });
     close();
   };
-  return (
-    <div className="absolute w-screen h-screen bg-[black]/50 z-[100] flex items-center justify-center">
-      <form className=" w-[782px] h-[458px] bg-[white] rounded-[8px] p-[20px]">
+  return ReactDom.createPortal(
+    <motion.div className="absolute w-[100vw] h-[100vh] bg-[black]/50 z-[100] flex items-center justify-center">
+      <motion.form
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.4, ease: easeInOut }}
+        className=" w-[782px] h-[458px] bg-[white] rounded-[8px] p-[20px]"
+      >
         <div
           className="w-full flex justify-between items-center"
           onClick={() => {
@@ -81,8 +88,9 @@ const GoalForm = ({ close, addGoal }) => {
             </div>
           </div>
         </div>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>,
+    document.getElementById("home")
   );
 };
 

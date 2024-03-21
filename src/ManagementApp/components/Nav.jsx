@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GoBriefcase } from "react-icons/go";
@@ -13,7 +13,8 @@ const Nav = () => {
   const navigate = useNavigate();
   const activeLink =
     "text-[#205BB1] bg-[#1D53A117]  w-full h-[40px] shadow-lg shadow-[black]/10 font-medium   flex  rounded-[10px]";
-  const normal = "w-full   ";
+  const normal =
+    "w-full  hover:bg-[#1D53A117]/10 h-[40px] rounded-[10px] flex   ";
   return (
     <div className="relative w-[303px] h-[90vh] bg-[white] rounded-[20px] flex flex-col items-center">
       <img src={logo} className="relative mt-[30px]" />
@@ -31,7 +32,7 @@ const Nav = () => {
             </span>
           </NavLink>
           <NavLink
-            to="/dashboard/departments"
+            to="departments"
             className={({ isActive, isPending }) =>
               isActive ? activeLink : normal
             }
@@ -73,8 +74,7 @@ const Nav = () => {
                 isActive ? activeLink : normal
               }
             >
-              <span className="flex gap-3 w-full items-center ">
-                {" "}
+              <span className="flex gap-3 w-full items-center pl-[10px]">
                 <IoSettingsOutline />
                 Settings
               </span>

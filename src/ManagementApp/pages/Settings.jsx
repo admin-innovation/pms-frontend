@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { user } from "../data/temp";
+import { user } from "../../data/temp";
 import { MdOutlineModeEdit } from "react-icons/md";
 
 const Settings = () => {

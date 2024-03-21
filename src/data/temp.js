@@ -51,7 +51,7 @@ export const user={
   "designation": "Executive Director",
   "phone_number": "+1234567890",
   "gender":"Female",
-  "profile_img": "https://example.com/profile_images/johndoe.jpg"
+  "profile_img": "/samiya.png"
 }
 
 export const TopPerformerData={

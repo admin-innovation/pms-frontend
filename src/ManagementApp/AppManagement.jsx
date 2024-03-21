@@ -10,26 +10,14 @@ import Signin from "./pages/Signin";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
 import HomeManagement from "./pages/HomeManagement";
-function App() {
-  let host = window.location.host;
-  let protocol = window.location.protocol;
-  let parts = host.split(".");
-  let subdomain = parts[0];
-  console.log(parts);
+function AppManagement() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="signin" element={<Signin />} />
-        {/* {subdomain == "management" ? (
-          <Route index element={<HomeManagement />} />
-        ) : (
-          <Route index element={<Home />} />
-        )} */}
-        <Route path="dashboard" element={<Layout />}>
-          <Route index element={<Home />} />
+      <Routes element={<Layout />}>
+        <Route element={<Layout />}>
+          <Route index path="dashboard" element={<Home />} />
           <Route path="departments" element={<Departments />} />
           <Route path="departments/:department_id" element={<Department />} />
-
           <Route path="analytics" element={<Analytics />} />
           <Route path="goals" element={<Goals />} />
           <Route path="settings" element={<Settings />} />
@@ -40,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppManagement;

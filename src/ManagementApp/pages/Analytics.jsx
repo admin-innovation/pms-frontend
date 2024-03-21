@@ -1,13 +1,13 @@
 import React from "react";
 import { useRef } from "react";
 import Select from "react-select";
-import { TopPerformerData, TopPerformerHR } from "../data/temp";
+import { TopPerformerData, TopPerformerHR } from "../../data/temp";
 import { CiSearch } from "react-icons/ci";
 import ChartTasks from "../components/Chart";
 import { CircularProgress } from "@nextui-org/react";
 import ReactStars from "react-rating-stars-component";
 import { FaCheckCircle } from "react-icons/fa";
-import { goals } from "../data/temp";
+import { goals } from "../../data/temp";
 
 const Analytics = () => {
   const x = 100;
