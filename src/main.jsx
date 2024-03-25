@@ -17,6 +17,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       ) : (
         "what are you looking for?redirect to login"
       )}
+      {subdomain === "hr" ?(
+        <AppManagement />) : (
+        "Vem uses too much foul language : 404"
+      )}
     </NextUIProvider>
   </React.StrictMode>
 );
