@@ -9,6 +9,7 @@ import Goals from "./pages/Goals";
 //import Signin from "./pages/Signin";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
+import Review from "./pages/Review";
 //import HomeManagement from "./pages/HomeManagement";
 
 function AppHR() {
@@ -23,6 +24,7 @@ function AppHR() {
           <Route path="goals" element={<Goals />} />
           <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Error />} />
+          <Route path="review" element={<Review/>} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -8,6 +8,7 @@ import { MdChecklist } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
+//the review nav button is missing, add to routes when fixed
 
 const Nav = () => {
   const navigate = useNavigate();

@@ -5,6 +5,7 @@ import { goals } from "../../data/temp";
 import { IoMdAddCircle } from "react-icons/io";
 import GoalForm from "../components/GoalForm";
 // import { NavLink } from "react-router-dom";
+// remeber to add departmental goals, should be a button that renders another page, could be a component? idk i'd ask vem
 
 const Goals = () => {
   const [activeView, setActiveView] = useState(1);
