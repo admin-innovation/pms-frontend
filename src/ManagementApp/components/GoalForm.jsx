@@ -4,6 +4,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { useState } from "react";
 import ReactDom from "react-dom";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const GoalForm = ({ close, addGoal }) => {
   const [dateValue, setdateValue] = useState({
@@ -42,41 +43,46 @@ const GoalForm = ({ close, addGoal }) => {
             <label for="goal" className="text-[16px] font-[600]">
               Goal Title
             </label>
-            <input
-              id="goal"
-              onChange={(e) => {
-                setTitle(e.currentTarget.value);
-              }}
-              value={title}
-              className="w-full border-[1px] border-black outline-none h-[35px] rounded-[8px] flex items-center "
-              placeholder="Goal Title"
-            />
+            <div className="w-full px-[30px] border-[1px] border-[gray] rounded-[8px] ">
+              <input
+                id="goal"
+                onChange={(e) => {
+                  setTitle(e.currentTarget.value);
+                }}
+                value={title}
+                className="w-full   outline-none h-[35px]   flex items-center "
+                placeholder="Goal Title"
+              />
+            </div>
           </div>
           <div className="w-full flex flex-col gap-2">
             <label for="description" className="text-[16px] font-[600]">
               Description
             </label>
-            <textarea
-              id="description"
-              onChange={(e) => {
-                setDescription(e.currentTarget.value);
-              }}
-              value={description}
-              className="h-[180px] border-[1px] border-black  outline-none rounded-[8px]"
-              placeholder="write goal description here"
-            />
+            <div className="w-full px-[30px] border-[1px] border-[gray] rounded-[8px] ">
+              <textarea
+                id="description"
+                onChange={(e) => {
+                  setDescription(e.currentTarget.value);
+                }}
+                value={description}
+                className="h-[180px] w-full  outline-none rounded-[8px]"
+                placeholder="write goal description here"
+              />
+            </div>
           </div>
           <div className="w-full flex items-center justify-between">
             <div className="w-[400px]flex flex-col gap-2">
               <label className="text-[16px] font-[600]">Goal Deadline</label>
 
-              <Datepicker
+              {/* <Datepicker
                 className="w-[100px]  relative outline-none border-[1px] border-black"
                 asSingle={true}
                 value={dateValue}
                 onChange={setdateValue}
                 showShortcuts={true}
-              />
+              /> */}
+              <Datepicker />
             </div>
             <div
               onClick={() => {
