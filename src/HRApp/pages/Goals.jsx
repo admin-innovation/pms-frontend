@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import { useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { goals } from "../../data/temp";
 import { IoMdAddCircle } from "react-icons/io";
 import GoalForm from "../components/GoalForm";
-// import { NavLink } from "react-router-dom";
-// remeber to add departmental goals, should be a button that renders another page, could be a component? idk i'd ask vem
 
 const Goals = () => {
+
   const [activeView, setActiveView] = useState(1);
   const [goalform, setGoalForm] = useState(false);
   const handleAddGoal = (e) => {
     setGoalForm(true);
   };
+
   const [goalsList, setGoals] = useState([...goals]);
   const closeGoalForm = () => {
     setGoalForm(false);
@@ -20,7 +20,6 @@ const Goals = () => {
   const handleButtonClick = (buttonName) => {
     setActiveView(buttonName);
   };
-
   return (
     <div className=" w-full flex flex-col gap-[10px] mt-[30px] ">
       {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
@@ -104,4 +103,5 @@ const GoalEntry = ({ title, achieved, date_created }) => {
     </div>
   );
 };
+
 export default Goals;

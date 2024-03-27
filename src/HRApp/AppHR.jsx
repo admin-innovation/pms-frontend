@@ -6,12 +6,13 @@ import Departments from "./pages/Departments";
 import Analytics from "./pages/Analytics";
 import Error from "./pages/Error";
 import Goals from "./pages/Goals";
-import Signin from "./pages/Signin";
+//import Signin from "./pages/Signin";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
-import HomeManagement from "./pages/HomeManagement";
+import Review from "./pages/Review";
+//import HomeManagement from "./pages/HomeManagement";
 
-function AppManagement() {
+function AppHR() {
   return (
     <BrowserRouter>
       <Routes element={<Layout />}>
@@ -23,10 +24,11 @@ function AppManagement() {
           <Route path="goals" element={<Goals />} />
           <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Error />} />
+          <Route path="review" element={<Review/>} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default AppManagement;
+export default AppHR;

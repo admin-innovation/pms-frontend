@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import AppManagement from "./ManagementApp/AppManagement";
 import { NextUIProvider } from "@nextui-org/react";
 import "./index.css";
+import AppHR from "./HRApp/AppHR";
 
 let host = window.location.host;
 let parts = host.split(".");
@@ -15,7 +16,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       {subdomain === "management" ? (
         <AppManagement />
       ) : (
-        "what are you looking for?redirect to login"
+        "what are you looking for? redirect to login"
+      )}
+      {subdomain === "hr" ?(
+        <AppHR />
+        ) : (
+        "Vem uses too much foul language : 404"
       )}
     </NextUIProvider>
   </React.StrictMode>
