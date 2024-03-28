@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Form from "../components/Form";
-import Image from "../../assets/loginillustration.svg";
+import Form from "./ManagementApp/components/Form";
+import Image from "./assets/loginillustration.svg";
 
 const Signin = () => {
   return (

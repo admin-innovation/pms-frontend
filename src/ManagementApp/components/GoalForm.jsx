@@ -4,7 +4,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { useState } from "react";
 import ReactDom from "react-dom";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const GoalForm = ({ close, addGoal }) => {
   const [dateValue, setdateValue] = useState({
@@ -82,7 +82,7 @@ const GoalForm = ({ close, addGoal }) => {
                 onChange={setdateValue}
                 showShortcuts={true}
               /> */}
-              <Datepicker />
+              {/* <Datepicker /> */}
             </div>
             <div
               onClick={() => {
