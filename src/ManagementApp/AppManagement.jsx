@@ -9,7 +9,6 @@ import Goals from "./pages/Goals";
 import Signin from "../Signin";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
-import HomeManagement from "./pages/HomeManagement";
 
 function AppManagement() {
   return (

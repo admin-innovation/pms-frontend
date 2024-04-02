@@ -16,21 +16,19 @@ const Form = () => {
     const userLogin = { staff_id: staffId, password: pass };
     try {
       const userData = await signinFetch(userLogin);
-      console.log(userData);
-      dispatch(setUser(userData));
-      console.log("Dispatch worked");
       setLoading(false);
+      //How about tokens
       if (userData.role === "staff") {
-        window.location.href = `http://staff.${domain}/dashboard`;
+        window.location.href = `http://staff.${domain}/dashboard?userId=${userData.id}`;
       }
       if (userData.role === "management") {
-        window.location.href = `http://management.${domain}/dashboard`;
+        window.location.href = `http://management.${domain}/dashboard?userId=${userData.id}`;
       }
       if (userData.role === "hod") {
-        window.location.href = `hod.${domain}/dashboard`;
+        window.location.href = `hod.${domain}/dashboard?userId=${userData.id}`;
       }
       if (userData.role === "hr") {
-        window.location.href = `hr.${domain}/dashboard`;
+        window.location.href = `hr.${domain}/dashboard?userId=${userData.id}`;
       }
     } catch (error) {
       console.log(error);

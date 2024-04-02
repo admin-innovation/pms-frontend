@@ -3,8 +3,15 @@ import { ImCancelCircle } from "react-icons/im";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useState } from "react";
 import ReactDom from "react-dom";
+import { useSelector } from "react-redux";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { addGoals } from "../../backend/api";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import Cookies from "js-cookie";
+import { v4 as uuidv4 } from "uuid";
 
 const GoalForm = ({ close, addGoal }) => {
   const [dateValue, setdateValue] = useState({
@@ -13,11 +20,34 @@ const GoalForm = ({ close, addGoal }) => {
   });
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
-  const handleAddGoal = () => {
-    addGoal((prev) => {
-      return [...prev, { title: title, status: 0, achieved: false }];
-    });
-    close();
+  const [deadline, setDeadline] = useState();
+  const [loading, setLoading] = useState();
+  const userId = Cookies.get("userId");
+
+  const handleAddGoal = async () => {
+    const deadline_date = deadline.toDate();
+    console.log(deadline_date.toISOString());
+    try {
+      const goal = {
+        _id: uuidv4(),
+        title: title,
+        description: description,
+        deadline: deadline_date.toISOString(),
+        author: userId,
+        status: 0,
+      };
+      console.log(goal);
+      const response = await addGoals(goal);
+      console.log(response);
+      // Add a toast like goal//Added
+      close();
+    } catch {
+      console.error("Error adding goals:", error);
+    }
+    // addGoal((prev) => {
+    //   return [...prev, { title: title, status: 0, achieved: false }];
+    // });
+    // close();
   };
   return ReactDom.createPortal(
     <motion.div className="absolute w-[100vw] h-[100vh] bg-[black]/50 z-[100] flex items-center justify-center">
@@ -72,7 +102,7 @@ const GoalForm = ({ close, addGoal }) => {
             </div>
           </div>
           <div className="w-full flex items-center justify-between">
-            <div className="w-[400px]flex flex-col gap-2">
+            <div className="w-[400px]flex flex-col gap-2 mb-[50px]">
               <label className="text-[16px] font-[600]">Goal Deadline</label>
 
               {/* <Datepicker
@@ -82,7 +112,17 @@ const GoalForm = ({ close, addGoal }) => {
                 onChange={setdateValue}
                 showShortcuts={true}
               /> */}
-              {/* <Datepicker /> */}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                    value={deadline}
+                    onChange={(newValue) => {
+                      setDeadline(newValue);
+                    }}
+                    label="Deadline"
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
             </div>
             <div
               onClick={() => {

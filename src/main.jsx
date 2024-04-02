@@ -12,7 +12,6 @@ import store from "./backend/store/store";
 
 let host = window.location.host;
 let parts = host.split(".");
-console.log(host);
 let subdomain = parts[0];
 // const user =
 

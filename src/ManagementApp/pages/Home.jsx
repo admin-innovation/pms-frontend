@@ -4,13 +4,30 @@ import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
 import { useState } from "react";
 import { goals } from "../../data/temp";
+import { getGoals } from "../../backend/api";
 
 import ChartTasks from "../components/Chart";
 import GoalForm from "../components/GoalForm";
+import { useEffect } from "react";
 
 const Home = () => {
-  const [goalsList, setGoals] = useState([...goals]);
+  const [goalsList, setGoals] = useState([]);
+  useEffect(() => {
+    // Pull all the necessary data
+    const fetchGoalsData = async () => {
+      try {
+        const goals = await getGoals(false, 5);
+        if (goals) {
+          console.log(goals);
+          setGoals(goals.goals);
+        }
+      } catch (error) {
+        console.error("Error fetching Goals:", error);
+      }
+    };
 
+    fetchGoalsData();
+  }, []);
   const percentage = 70;
   const [goalform, setGoalForm] = useState(false);
   const handleAddGoal = (e) => {
@@ -101,11 +118,10 @@ const Home = () => {
             </div>
           </div>
           <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px]">
-            {goalsList.map((item, key) => {
-              return (
-                <GoalCheckBox title={item.title} checked={item.achieved} />
-              );
-            })}
+            {goalsList &&
+              goalsList.map((item, key) => {
+                return <GoalCheckBox item={item} />;
+              })}
           </div>
         </div>
       </div>
@@ -113,14 +129,18 @@ const Home = () => {
     </div>
   );
 };
-const GoalCheckBox = ({ checked, title }) => {
+const GoalCheckBox = ({ item }) => {
   return (
     <div className="flex w-full items-center justify-between">
       <label className=" flex items-center">
-        <input className="w-[33px]" type="checkbox" checked={checked} />
-        <span className="text-[13px] font-[500]">{title}</span>
+        <input
+          className="w-[33px]"
+          type="checkbox"
+          checked={item.status === 100}
+        />
+        <span className="text-[13px] font-[500]">{item.title}</span>
       </label>
-      {!checked ? (
+      {!item.sent_to_hr ? (
         <span className="border-[1px] border-solid border-[#17417E] w-[80px] flex items-center justify-center text-[12px] font-[600] text-[#17417E] py-[3px] rounded-[4px] hover:bg-[#e0ecf2] cursor-pointer">
           Send to HR
         </span>
@@ -170,13 +190,13 @@ const Calendar = () => {
   const today = date.getDate();
   const weekCalendar = getWeekCalendar(date);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sun"];
-  console.log(weekCalendar);
+
   return (
     <div className="relative flex  items-center justify-center w-full bg-[white] h-full rounded-[10px]">
       <span className=" absolute text-[16px] font-bold right-3 top-4">
         {date.getDate()}-{date.getMonth()}-{date.getFullYear()}
       </span>
-      <div className="relative w-full  flex items-center justify-center">
+      <div className="relative w-full mx-[20px]  flex items-center justify-center">
         {weekCalendar.map((item, key) => {
           return (
             <div

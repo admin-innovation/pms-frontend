@@ -7,15 +7,47 @@ import { FaPhoneAlt } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoCloseSharp } from "react-icons/io5";
+import { getEmployees, getDepartment } from "../../backend/api";
 
 const Department = () => {
   const { department_id } = useParams();
+  const [employeesData, setEmployeesData] = useState(null);
+  const [departmentData, setDepartmentData] = useState(null);
   const data = Departments[department_id];
   const [staffView, setStaffView] = useState();
   const closeStaffView = () => {
-    console.log("Clicked");
     setStaffView(false);
   };
+  useEffect(() => {
+    const fetchDepartmentData = async () => {
+      try {
+        const data = await getDepartment(department_id);
+        if (data) {
+          setDepartmentData(data);
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching Department Details for ${department_id} :`,
+          error
+        );
+      }
+    };
+    const fetchEmployeesData = async () => {
+      try {
+        const data = await getEmployees(department_id);
+        if (data) {
+          setEmployeesData(data.employees);
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching Employees Data for Department ${department_id} :`,
+          error
+        );
+      }
+    };
+    fetchDepartmentData();
+    fetchEmployeesData();
+  }, []);
 
   return (
     <div className="w-full h-full flex flex-col gap-[8px]">

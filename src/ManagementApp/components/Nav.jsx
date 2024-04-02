@@ -8,7 +8,7 @@ import { MdChecklist } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { IoLogOutOutline } from "react-icons/io5";
-
+import { useSelector } from "react-redux";
 
 const Nav = () => {
   const navigate = useNavigate();
