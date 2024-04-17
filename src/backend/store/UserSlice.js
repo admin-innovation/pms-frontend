@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Profiler } from 'react';
 
 const initialState = {
-  firstName: 'john',
-  lastName: 'sani',
-  id: 'snai',
-  token: '',
-  refreshToken: '',
+  first_name: '',
+  last_name: '',
+  last_name:'',
+  id: '',
+  designation:'',
   email: '',
   role: '',
 };
@@ -16,20 +17,20 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       const user = action.payload
-      state.firstName = action.payload.first_name;
-      state.lastName = action.payload.last_name;
-      state.id = action.payload.id;
-      // state.token = action.payload.token;
-      // state.refreshToken = action.payload.refreshToken;
-      state.email = action.payload.email;
-      state.role = action.payload.role;
+      state.user = action.payload
+      state.first_name = user.first_name;
+      state.middle_name= user.middle_name;
+      state.profile_pic = user.profile_pic
+      state.last_name = user.last_name;
+      state.id = user._id;
+      state.designation = user.designation
+      state.email = user.email;
+      state.role = user.role;
     },
     clearUser(state) {
-      state.firstName = '';
-      state.lastName = '';
+      state.first_name = '';
+      state.last_name = '';
       state.id = '';
-      state.token = '';
-      state.refreshToken = '';
       state.email = '';
       state.role = '';
     },

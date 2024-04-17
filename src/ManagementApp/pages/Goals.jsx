@@ -1,19 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { goals } from "../../data/temp";
+
 import { IoMdAddCircle } from "react-icons/io";
+import { useSelector } from "react-redux";
 import GoalForm from "../components/GoalForm";
+import { AnimatePresence, motion } from "framer-motion";
 // import { NavLink } from "react-router-dom";
 // remeber to add departmental goals, should be a button that renders another page, could be a component? idk i'd ask vem
 
 const Goals = () => {
   const [activeView, setActiveView] = useState(1);
   const [goalform, setGoalForm] = useState(false);
+  const goals = useSelector((state) => state.goals.goals);
   const handleAddGoal = (e) => {
     setGoalForm(true);
   };
-  const [goalsList, setGoals] = useState([...goals]);
+
   const closeGoalForm = () => {
     setGoalForm(false);
   };
@@ -22,7 +25,7 @@ const Goals = () => {
   };
 
   return (
-    <div className=" w-full flex flex-col gap-[10px] mt-[30px] ">
+    <div className=" w-full overflow-y-scroll  flex flex-col gap-[10px] mt-[30px] ">
       {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
       <div className="w-full">
         <p className="font-bold text-[16px]">Organiztional Goals</p>
@@ -64,16 +67,18 @@ const Goals = () => {
         </button>
       </div>
       <div className=" w-full  bg-white rounded-[8px]  min-h-[70vh]">
-        {goals.map((goalitem, key) => {
+        {goals?.map((goalitem, key) => {
           return (
             <GoalEntry
               title={goalitem.title}
               achieved={goalitem.achieved}
               date_created={goalitem.date_created}
+              description={goalitem.description}
+              deadline={goalitem.deadline}
             />
           );
         })}
-        <div className="w-full flex justify-end px-[40px]">
+        <div className="w-full flex justify-end px-[40px] py-[30px]">
           <div
             className="bg-[#4D7CC1]  rounded-[4px] text-white flex items-center gap-3 cursor-pointer hover:bg-[#072b61] px-[10px] py-[10px]"
             onClick={handleAddGoal}
@@ -87,20 +92,47 @@ const Goals = () => {
   );
 };
 
-const GoalEntry = ({ title, achieved, date_created }) => {
+const GoalEntry = ({
+  title,
+  achieved,
+  date_created,
+  deadline,
+  description,
+}) => {
+  const [dropdown, setDropdown] = useState(false);
   return (
-    <div className="w-full h-[40px] flex justify-between px-[40px] hover:bg-[#f8f8ff]  transition-all duration-200 ease-in-out my-[20px]">
-      <div className=" flex gap-3 items-center">
-        <input type="checkbox" checked={achieved} />
-        <label className="text-black text-[12px]">{title} Text enty </label>
-      </div>
-      <div className="flex items-center gap-[30px]">
-        <div className="w-[79px] h-[30px]  bg-[#EBF0F7] rounded-[4px] text-[#205BB1] font-[400] text-[12px] text-center flex items-center justify-center">
-          Description
+    <div
+      onClick={() => {
+        setDropdown(!dropdown);
+      }}
+    >
+      <div className="w-full h-[40px] flex justify-between px-[40px] hover:bg-[#f8f8ff]  transition-all duration-200 ease-in-out my-[20px]">
+        <div className=" flex gap-3 items-center">
+          <input type="checkbox" checked={achieved} />
+          <label className="text-black text-[12px]">{title} Text enty </label>
         </div>
-        <p className="text-[9px] font-[300] text-[black]">{date_created}</p>
-        <FaRegTrashCan className="hover:text-[red] cursor-pointer" />
+        <div className="flex items-center gap-[30px]">
+          <div className="w-[79px] h-[30px]  bg-[#EBF0F7] rounded-[4px] text-[#205BB1] font-[400] text-[12px] text-center flex items-center justify-center">
+            Description
+          </div>
+          <p className="text-[9px] font-[300] text-[black]">{date_created}</p>
+          <FaRegTrashCan className="hover:text-[red] cursor-pointer" />
+        </div>
       </div>
+      <AnimatePresence>
+        {dropdown && (
+          <motion.div
+            initial={{ opacity: 0.5, height: 0 }}
+            animate={{ opacity: 1, height: 200 }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-[200px]  bg-white rounded-[12px] drop-shadow-xl  flex flex-col  justify-between"
+          >
+            <div className="px-[30px] py-[20px]">{description}</div>
+            <div className="px-[30px] py-[20px]">{deadline}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

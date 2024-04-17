@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
+import { ToastContainer, toast } from "react-toastify";
 
 const GoalForm = ({ close, addGoal }) => {
   const [dateValue, setdateValue] = useState({
@@ -36,10 +37,9 @@ const GoalForm = ({ close, addGoal }) => {
         author: userId,
         status: 0,
       };
-      console.log(goal);
+
       const response = await addGoals(goal);
-      console.log(response);
-      // Add a toast like goal//Added
+
       close();
     } catch {
       console.error("Error adding goals:", error);
@@ -49,8 +49,9 @@ const GoalForm = ({ close, addGoal }) => {
     // });
     // close();
   };
+
   return ReactDom.createPortal(
-    <motion.div className="absolute w-[100vw] h-[100vh] bg-[black]/50 z-[100] flex items-center justify-center">
+    <motion.div className="absolute inset-0 w-[100vw] h-[100vh] bg-[black]/50 z-[100] flex items-center justify-center">
       <motion.form
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -105,13 +106,6 @@ const GoalForm = ({ close, addGoal }) => {
             <div className="w-[400px]flex flex-col gap-2 mb-[50px]">
               <label className="text-[16px] font-[600]">Goal Deadline</label>
 
-              {/* <Datepicker
-                className="w-[100px]  relative outline-none border-[1px] border-black"
-                asSingle={true}
-                value={dateValue}
-                onChange={setdateValue}
-                showShortcuts={true}
-              /> */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker"]}>
                   <DatePicker
@@ -126,6 +120,7 @@ const GoalForm = ({ close, addGoal }) => {
             </div>
             <div
               onClick={() => {
+                notify();
                 handleAddGoal();
               }}
               className="w-[77px] h-[30px] bg-[#4D7CC1] text-center text-white rounded-[4px] text-[12px] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#062b61]"
@@ -136,7 +131,7 @@ const GoalForm = ({ close, addGoal }) => {
         </div>
       </motion.form>
     </motion.div>,
-    document.getElementById("home")
+    document.getElementById("root")
   );
 };
 

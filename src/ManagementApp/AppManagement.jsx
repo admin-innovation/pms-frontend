@@ -7,9 +7,11 @@ import Analytics from "./pages/Analytics";
 import Error from "./pages/Error";
 import Goals from "./pages/Goals";
 import Signin from "../Signin";
+import SettingsLayout from "./pages/SettingsLayout";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
-
+import Support from "./pages/Support";
+import About from "./pages/About";
 function AppManagement() {
   return (
     <Routes>
@@ -19,7 +21,8 @@ function AppManagement() {
         <Route path="departments/:department_id" element={<Department />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="goals" element={<Goals />} />
-        <Route path="settings" element={<Settings />} />
+        <Route path="settings/*" element={<SettingsLayout />} />
+
         <Route path="*" element={<Error />} />
       </Route>
     </Routes>

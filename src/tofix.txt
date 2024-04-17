@@ -1,4 +1,16 @@
-1. The homepage link is empty
-2. The sidebar is not looking good
-3. Checkout the charts
-4. Layout of the website if funky
+1. Save header data so that it doesn't have to to be reloading all the time
+2. Save all called upon data
+3. Add loading state
+4. Come back and do analytics page
+5. Fix the fact that header is the one calling the data let it be home collecting the data
+6. Add loading page after login so that all necessary data can be gotten to improve user experience
+7. Fix all api calls so that if that particular data has been called and stored there is no need to recall the api
+8. Move UserId to cookies too
+9. Add a toast for each significant action
+10. The components are not reloading after an update has been made
+11. Remeber to add keys and labels to called data
+12. create a custom paragraph component to handle overflow
+13. Ensure to do date formatting for appearance
+14. I bundled the comment, chat, notification feature together since they are dependent on the stream.io
+15. Hold up on analytics
+16. Rewrite all api calls within the app so that they are safe and operate well

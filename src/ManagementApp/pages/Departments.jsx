@@ -17,9 +17,26 @@ import {
   SatCtrl,
 } from "../../assets/index";
 import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+// import { Departments } from "../../data/temp";
+import { getAllDepartments } from "../../backend/api";
 
 const Departments = () => {
-  console.log(Facilities);
+  // const [departments, setDepartments] = useState();
+  // useEffect(() => {
+  //   // const fetchDepartmentsData = async () => {
+  //   //   try {
+  //   //     const data = await getAllDepartments();
+  //   //     if (data) {
+  //   //       // setDepartments(data.departments);
+  //   //     }
+  //   //   } catch (error) {
+  //   //     console.error(`Error fetching Departments`, error);
+  //   //   }
+  //   // };
+  //   // fetchDepartmentsData();
+  // }, []);
+
   return (
     <div className="relative w-full h-full flex flex-col gap-[20px] mb-[20px]">
       <div className="relative w-full flex flex-col gap-[5px]">
@@ -58,7 +75,7 @@ const Departments = () => {
           />
           <DepartmentTile title="Satellite Navigation" image={SatNav} link="" />
           <DepartmentTile
-            title="Network Operation Center"
+            title="Network Operations Center"
             image={Network}
             link=""
           />
@@ -68,7 +85,11 @@ const Departments = () => {
             image={SatCtrl}
             link=""
           />
-          <DepartmentTile title="Broadband" image={Broadband} link="" />
+          <DepartmentTile
+            title="Broadband Networks"
+            image={Broadband}
+            link=""
+          />
           <DepartmentTile title="Broadcast" image={Broadcast} link="" />
           <DepartmentTile title="Facility" image={Facilities} link="" />
         </div>
@@ -81,11 +102,7 @@ const Departments = () => {
           </p>
         </div>
         <div className="w-full flex gap-x-[10px] gap-y-[10px] flex-wrap">
-          <DepartmentTile
-            title="Marketing and Stakeholders Engagement"
-            image={Marketing}
-            link=""
-          />
+          <DepartmentTile title="Marketing" image={Marketing} link="" />
           <DepartmentTile title="Sales" image={Sales} link="" />
           <DepartmentTile title="Business Office" image={Business} link="" />
         </div>

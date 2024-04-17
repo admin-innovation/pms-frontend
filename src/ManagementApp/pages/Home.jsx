@@ -2,33 +2,18 @@ import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { CircularProgress } from "@nextui-org/react";
 import { IoMdAddCircle } from "react-icons/io";
-import { useState } from "react";
-import { goals } from "../../data/temp";
-import { getGoals } from "../../backend/api";
-
+import { useState, useEffect } from "react";
 import ChartTasks from "../components/Chart";
 import GoalForm from "../components/GoalForm";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { redirect, useNavigate } from "react-router";
+import { sendToHr } from "../../backend/api";
 
 const Home = () => {
-  const [goalsList, setGoals] = useState([]);
-  useEffect(() => {
-    // Pull all the necessary data
-    const fetchGoalsData = async () => {
-      try {
-        const goals = await getGoals(false, 5);
-        if (goals) {
-          console.log(goals);
-          setGoals(goals.goals);
-        }
-      } catch (error) {
-        console.error("Error fetching Goals:", error);
-      }
-    };
-
-    fetchGoalsData();
-  }, []);
   const percentage = 70;
+  const [goalsList, setGoalsList] = useState([]);
+  const goals = useSelector((state) => state.goals);
+  console.log(goals);
   const [goalform, setGoalForm] = useState(false);
   const handleAddGoal = (e) => {
     setGoalForm(true);
@@ -38,10 +23,10 @@ const Home = () => {
   };
   return (
     <div className="w-full flex flex-col rounded-[10px] ">
-      {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
+      {goalform && <GoalForm close={closeGoalForm} />}
 
       <div className="w-full gap-4  mt-[10px] flex">
-        <div className="flex bg-white h-[160px] w-[px] rounded-[8px] items-center p-[30px] gap-6 ">
+        <div className="relative flex bg-white h-[160px] w-[px] rounded-[8px] items-center p-[30px] gap-6 ">
           <div className="flex flex-col gap-4">
             <div>
               <p className="text-[16px] font-[700]">Goal Progress</p>
@@ -58,11 +43,17 @@ const Home = () => {
             <span className="text-[20px] font-[600] ">{percentage}%</span>
           </div>
           <div className="relative w-[1px] h-[128px] bg-[#D9D9D9] rounded-full" />
-          <div className="flex gap-6 ">
-            <GoalMeter status={80} id="Goal 1" />
-            <GoalMeter status={50} id="Goal 2" />
-            <GoalMeter status={20} id="Goal 3" />
+          <div className="flex">
+            {goals.goals.slice(0, 2)?.map((item, key) => (
+              <GoalMeter status={item.status} id={item.title} />
+            ))}
           </div>
+          <a
+            href="/goals"
+            className=" absolute text-[10px] cursor-pointer font-normal w-[50px] text-[white] h-[20px] flex items-center justify-center rounded-[4px] bg-[#4D7CC1] right-[30px] hover:bg-[#4772b2] bottom-[20px]"
+          >
+            more
+          </a>
         </div>
         <div className="w-[500px] h-[160px] bg-white rounded-[10px]">
           <Calendar className="" />
@@ -118,10 +109,9 @@ const Home = () => {
             </div>
           </div>
           <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px]">
-            {goalsList &&
-              goalsList.map((item, key) => {
-                return <GoalCheckBox item={item} />;
-              })}
+            {goals.goals.slice(0, 5).map((item, key) => (
+              <GoalCheckBox key={key} item={item} />
+            ))}
           </div>
         </div>
       </div>
@@ -129,7 +119,24 @@ const Home = () => {
     </div>
   );
 };
+
+import { updateGoals } from "../../backend/store/GoalSlice";
 const GoalCheckBox = ({ item }) => {
+  const goal_id = item._id;
+  const dispatch = useDispatch();
+  const [update, setUpdate] = useState();
+  const send = async () => {
+    try {
+      const data = await sendToHr(goal_id);
+      if (data) {
+        dispatch(updateGoals({ id: goal_id, date: data.date }));
+        setUpdate(true);
+        //Change the date to todays date in str
+      }
+    } catch {
+      console.error("error sending to Hr");
+    }
+  };
   return (
     <div className="flex w-full items-center justify-between">
       <label className=" flex items-center">
@@ -141,11 +148,16 @@ const GoalCheckBox = ({ item }) => {
         <span className="text-[13px] font-[500]">{item.title}</span>
       </label>
       {!item.sent_to_hr ? (
-        <span className="border-[1px] border-solid border-[#17417E] w-[80px] flex items-center justify-center text-[12px] font-[600] text-[#17417E] py-[3px] rounded-[4px] hover:bg-[#e0ecf2] cursor-pointer">
+        <span
+          onClick={() => {
+            send();
+          }}
+          className="border-[1px] border-solid border-[#17417E] w-[80px] flex items-center justify-center text-[12px] font-[600] text-[#17417E] py-[3px] rounded-[4px] hover:bg-[#e0ecf2] cursor-pointer"
+        >
           Send to HR
         </span>
       ) : (
-        <span className="text-[9px] font-[300]">29th March</span>
+        <span className="text-[9px] font-[300]">{item.date_sent_to_hr}</span>
       )}
     </div>
   );
@@ -153,18 +165,20 @@ const GoalCheckBox = ({ item }) => {
 
 const GoalMeter = ({ id, status }) => {
   return (
-    <CircularProgress
-      label={id}
-      value={status}
-      classNames={{
-        svg: "w-[72px] h-[72px] ",
-        indicator: "stroke-[#4D7CC1]",
-        track: "stroke-[#E9EFF7]",
-        value: "text-1xl font-semibold text-black",
-      }}
-      strokeWidth={20}
-      showValueLabel={true}
-    />
+    <div className="flex  items-center justify-center text-left">
+      <CircularProgress
+        value={status}
+        classNames={{
+          svg: "w-[72px] h-[72px] ",
+          indicator: "stroke-[#4D7CC1]",
+          track: "stroke-[#E9EFF7]",
+          value: "text-1xl font-semibold text-black",
+        }}
+        strokeWidth={20}
+        showValueLabel={true}
+      />
+      <label className="text-[10px] w-[10ch] ">{id}</label>
+    </div>
   );
 };
 
@@ -194,7 +208,7 @@ const Calendar = () => {
   return (
     <div className="relative flex  items-center justify-center w-full bg-[white] h-full rounded-[10px]">
       <span className=" absolute text-[16px] font-bold right-3 top-4">
-        {date.getDate()}-{date.getMonth()}-{date.getFullYear()}
+        {date.getDate()}-{date.getMonth() + 1}-{date.getFullYear()}
       </span>
       <div className="relative w-full mx-[20px]  flex items-center justify-center">
         {weekCalendar.map((item, key) => {

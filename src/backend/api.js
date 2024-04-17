@@ -1,18 +1,156 @@
 import { json } from "react-router";
 import Cookies from 'js-cookie';
+import { toast } from "react-toastify";
+
 
 const url = "http://127.0.0.1:8000"
 
 
 
+/// Write refreshTOken function into all api's check if the user is still making api calls refresh if expired,
+/// Write script to logout user once token is expired
+// export const getTasks = async(id)=>{
+//   try{
+//     const response = await fetch(`${url}/tasks?employee_id=${id}`,
+//     {method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+
+//     })
+
+//   }
+//   catch(error){
+//     return error
+//   }
+// }
+
+export const submitTask = async(task_id, report) =>{
+ const  data={report:report}
+  try{
+    const response = await fetch(`${url}/tasks/${task_id}?submitted=${true}`,{
+      method:'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(data),
+    })
+    if (response.ok){
+      return true
+    }
+    else{
+      return false
+    }
+  }catch{
+    console.error('Error Sending to Hr:', error);
+  }
+}
+
+export const sendToHr = async (goal_id) => {
+  const date = new Date();
+
+  const data = {
+    sent_to_hr: true, // Use boolean value instead of string
+    date_sent_to_hr: date.toISOString(),
+  };
+
+  try {
+    const response = await fetch(`${url}/goals/${goal_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      return {status:true, date:data.date_sent_to_hr};
+    } else {
+      console.error('Error Sending to Hr:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error Sending to Hr:', error);
+  }
+
+  return false; // Return false if the request fails
+};
+
+// export const sendToHr = async(goal_id)=>{
+//   const date = new Date();
+
+//   const data = {
+//     sent_to_hr:"True",
+//     date_sent_to_hr:date.toISOString()
+//   }
+//   try{
+//     const response = await fetch(`${url}/goals/${goal_id}`, {
+//       method: 'PATCH',
+//       body:  JSON.stringify(data)
+//     });
+//     if(response.ok){
+//       return true
+//     }
+
+//   }
+//   catch{
+//     console.error('Error Sending to Hr:', error);
+//   }
+// }
+
+
+export const uploadProfilePic = async (employee_id,file)=>{
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    const response = await fetch(`${url}/employees/${employee_id}/upload`, {
+      method: 'PATCH',
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to upload file');
+    }
+
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+};
+
+
+export const getTask = async(employee_id, department)=>{
+  const token = Cookies.get("accessToken")
+  console.log(employee_id)
+  try{
+    const response =await fetch(`${url}/tasks?employee_id=${employee_id}`,{
+      method:"GET",
+      // headers: {
+      //   'Authorization': `Bearer ${token}`,
+      //   'Content-Type': 'application/json'
+      // }
+    })
+    const data = await response.json()
+    return data.tasks
+  }
+  catch(error){
+    return error
+  }
+
+  }
+
+
+
 export const getEmployees = async(department)=>{
   const token = Cookies.get("accessToken")
+  console.log(`${url}/employees?department=${department}`)
   const response =await fetch(`${url}/employees?department=${department}`,{
     method:"GET",
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
+    // headers: {
+    //   'Authorization': `Bearer ${token}`,
+    //   'Content-Type': 'application/json'
+    // }
   })
   const data = await response.json()
   console.log(data)
@@ -54,9 +192,9 @@ export const getDepartment = async(department)=>{
 }
 
 
-export const getGoals = async(id,limit)=>{
+export const getGoals = async(limit)=>{
   const token = Cookies.get("accessToken")
-  if(!id){
+
     const response = await fetch(`${url}/goals?limit=${limit}`,{
       method:"GET",
 
@@ -67,10 +205,9 @@ export const getGoals = async(id,limit)=>{
     }
       )
     const data = await response.json()
-
     return data
 
-  }
+
 }
 export const addGoals = async (goal) => {
   try {
@@ -85,7 +222,7 @@ export const addGoals = async (goal) => {
       }
     });
     const data = await response.json();
-    return data.json
+    return data
   } catch (error) {
     console.error("Error Adding Goal:", error);
   }

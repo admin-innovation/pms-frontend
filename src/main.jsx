@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import AppManagement from "./ManagementApp/AppManagement";
+import AppStaff from "./StaffApp/AppStaff";
 
 import { NextUIProvider } from "@nextui-org/react";
 import "./index.css";

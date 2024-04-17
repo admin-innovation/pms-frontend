@@ -39,8 +39,8 @@ const Form = () => {
   const [staffId, setStaffId] = useState();
   const [pass, setPass] = useState();
   return (
-    <div className="h-[565px] w-[554px] bg-white  rounded-3xl border-[1.5px] border-black p-[30px] ">
-      <h1 className="text-4xl font-semibold">Sign In To Your Account</h1>
+    <div className="h-[500px] w-[450px] bg-white  rounded-3xl border-[1.5px] border-black p-[30px] ">
+      <h1 className="text-3xl font-semibold">Sign In To Your Account</h1>
       <p className="font-medium text-lg text-gray-500 mt-4">
         Enter Your Credentials used in Anomis
       </p>
