@@ -103,20 +103,17 @@ const GoalForm = ({ close, addGoal }) => {
             </div>
           </div>
           <div className="w-full flex items-center justify-between">
-            <div className="w-[400px]flex flex-col gap-2 mb-[50px]">
+            <div className="w-[200px] flex flex-col gap-2 mb-[50px]">
               <label className="text-[16px] font-[600]">Goal Deadline</label>
 
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                    value={deadline}
-                    onChange={(newValue) => {
-                      setDeadline(newValue);
-                    }}
-                    label="Deadline"
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
+              <input
+                className="outline-none"
+                value={deadline}
+                onChange={(e) => {
+                  setDeadline(e.currentTarget.value);
+                }}
+                type="Date"
+              />
             </div>
             <div
               onClick={() => {

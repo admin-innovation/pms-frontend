@@ -1,26 +1,33 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import Header from "./Header";
-import Nav from "./Nav";
+
+import Header from "../components/Header";
+import Nav from "../components/Nav";
 import { setUser } from "../../backend/store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { getEmployee, fetchNotifications } from "../../backend/api";
 import { useState, useEffect, useRef } from "react";
-import LoadingScreen from "./LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen";
 import Cookies from "js-cookie";
 import { setGoals } from "../../backend/store/GoalSlice";
+import { setNotifications } from "../../backend/store/NotificationSlice";
 import { getGoals } from "../../backend/api";
-
-// Find away that only verified users with tokens are allowed to login else go back to login
 
 const Layout = ({ children }) => {
   const [user, setUserData] = useState();
-  const [searchParams] = useSearchParams();
   const userId = Cookies.get("userId");
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    const getNotifications = async () => {
+      try {
+        const notifications = await fetchNotifications(userId);
+        dispatch(setNotifications(notifications.notifications));
+      } catch (error) {
+        console.error("Error fetching Goals:", error);
+      }
+    };
     const fetchGoalsData = async () => {
       try {
         const goals = await getGoals(1000);
@@ -44,33 +51,34 @@ const Layout = ({ children }) => {
     };
     if (userId) {
       fetchEmployee(userId);
+      fetchGoalsData();
+      getNotifications();
 
-      setIsLoading(false);
-      if (user) {
+      setTimeout(() => {
         setIsLoading(false);
-      }
+      }, 5000);
     }
-    fetchGoalsData();
   }, [dispatch]);
-  return isLoading ? (
-    <LoadingScreen />
-  ) : (
-    <div className=" bg-[#F1F4F9]   flex flex-row gap-[rem] relative w-screen min-h-screen overflow-y-scroll  overflow-x-hidden   py-[30px]   pl-[20px] pr-[60px]">
-      <div className="relative w-[25%]">
-        <div className="fixed top-[30px]">
-          <Nav />
-        </div>
-      </div>
 
-      <div className="w-[78%]  h-full  relative  flex flex-col items-center justify-center ">
-        <div className="w-[80%] fixed top-[10px]    h-[80px] z-100  ">
-          <Header />
+  return (
+    <>
+      <div className=" bg-[#F1F4F9]   flex flex-row  relative w-screen max-h-screen overflow-y-hidden overflow-x-hidden   py-[30px]   ">
+        <div className="relative mx-[20px] h-screen ">
+          <div className="top-[30px]">
+            <Nav />
+          </div>
         </div>
-        <div className="w-full h-full relative flex mt-[50px] ">
-          <Outlet />
+
+        <div className="relative  w-full min-h-screen overflow-y-scroll   flex flex-col items-center justify-center ">
+          <div className="w-[80%] fixed top-[10px]    h-[80px] z-100  ">
+            <Header />
+          </div>
+          <div className="w-full h-full relative flex min-h-screen mt-[50px] ">
+            <Outlet />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -8,13 +8,18 @@ import GoalForm from "../components/GoalForm";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router";
 import { sendToHr } from "../../backend/api";
+import { FaDropbox } from "react-icons/fa6";
 
 const Home = () => {
-  const percentage = 70;
-  const [goalsList, setGoalsList] = useState([]);
   const goals = useSelector((state) => state.goals);
-  console.log(goals);
   const [goalform, setGoalForm] = useState(false);
+  const [goalPercentage, setGoalPercentage] = useState(0);
+  useEffect(() => {
+    if (goals) {
+      const sum = goals.goals.reduce((total, obj) => total + obj.status, 0);
+      setGoalPercentage(sum);
+    }
+  }, [goals]);
   const handleAddGoal = (e) => {
     setGoalForm(true);
   };
@@ -22,11 +27,11 @@ const Home = () => {
     setGoalForm(false);
   };
   return (
-    <div className="w-full flex flex-col rounded-[10px] ">
+    <div className="w-full flex flex-col rounded-[10px] mr-[20px]">
       {goalform && <GoalForm close={closeGoalForm} />}
 
-      <div className="w-full gap-4  mt-[10px] flex">
-        <div className="relative flex bg-white h-[160px] w-[px] rounded-[8px] items-center p-[30px] gap-6 ">
+      <div className="w-full gap-4  mt-[10px] flex flex-wrap">
+        <div className="relative flex flex-wrap  bg-white min-h-[160px] min-w-[700px] rounded-[8px] items-center p-[30px] gap-6 ">
           <div className="flex flex-col gap-4">
             <div>
               <p className="text-[16px] font-[700]">Goal Progress</p>
@@ -36,31 +41,53 @@ const Home = () => {
             </div>
             <div className="relative w-[250px] bg-[#D9D9D9] h-[8px] rounded-full">
               <div
-                className="absolute h-full bg-[#4D7CC1] rounded-full"
-                style={{ width: `${percentage}%` }}
+                className="absolute h-full bg-[#74B72E] rounded-full"
+                style={{ width: `${goalPercentage}%` }}
               />
             </div>
-            <span className="text-[20px] font-[600] ">{percentage}%</span>
+            <span className="text-[20px] font-[600] ">{goalPercentage}%</span>
           </div>
-          <div className="relative w-[1px] h-[128px] bg-[#D9D9D9] rounded-full" />
-          <div className="flex">
-            {goals.goals.slice(0, 2)?.map((item, key) => (
-              <GoalMeter status={item.status} id={item.title} />
-            ))}
+          <div className="relative w-[1px] h-[80%] bg-[#D9D9D9] rounded-full" />
+          <div className="flex flex-wrap">
+            {goals.goals.length > 0 ? (
+              goals.goals
+                .slice(0, 3)
+                ?.map((item, key) => (
+                  <GoalMeter status={item.status} id={item.title} />
+                ))
+            ) : (
+              <div className="w-full h-full flex text-gray-400   flex-col items-center justify-center opacity-30 hover:opacity-75 cursor-pointer ">
+                <span>Your don't have nay goals yet</span>
+                <span className="text-[15px]">Add Goals</span>
+                <span className="text-[30px]">
+                  <FaDropbox />
+                </span>
+              </div>
+            )}
           </div>
-          <a
-            href="/goals"
-            className=" absolute text-[10px] cursor-pointer font-normal w-[50px] text-[white] h-[20px] flex items-center justify-center rounded-[4px] bg-[#4D7CC1] right-[30px] hover:bg-[#4772b2] bottom-[20px]"
-          >
-            more
-          </a>
+          {goals.goals.length > 0 ? (
+            <a
+              href="goals"
+              className=" absolute text-[10px] cursor-pointer font-normal w-[50px] text-[white] h-[20px] flex items-center justify-center rounded-[4px] bg-[#4D7CC1] right-[30px] hover:bg-[#4772b2] bottom-[20px]"
+            >
+              more
+            </a>
+          ) : (
+            <div
+              className=" absolute text-[10px] cursor-pointer font-normal gap-2 py-[5px] px-[10px] text-[white]  flex items-center justify-center rounded-[4px] bg-[#4D7CC1] right-[30px] hover:bg-[#4772b2] bottom-[20px]"
+              onClick={handleAddGoal}
+            >
+              <IoMdAddCircle className="text-[15px]" />{" "}
+              <span>Create new Goal</span>
+            </div>
+          )}
         </div>
-        <div className="w-[500px] h-[160px] bg-white rounded-[10px]">
+        <div className="flex-1 min-h-[160px] bg-white rounded-[10px]">
           <Calendar className="" />
         </div>
       </div>
       <div className="w-full flex mt-[1rem] gap-4 ">
-        <div className="w-[600px]  bg-white rounded-[8px] flex flex-col p-[20px]">
+        <div className="flex-1  bg-white rounded-[8px] flex flex-col p-[20px]">
           <div className="w-full flex justify-between">
             <p className="text-[16px] font-[700]">Analytics Per Department</p>
             <div className="flex gap-4">
@@ -97,7 +124,7 @@ const Home = () => {
           </div>
           <ChartTasks />
         </div>
-        <div className="bg-[white] w-[600px] h-full rounded-[8px]">
+        <div className="bg-[white] flex-1 h-full rounded-[8px]">
           <div className="flex w-full justify-between p-[20px]">
             <p className="font-[700] text-[16px]">Goals Window</p>
             <div
@@ -108,10 +135,20 @@ const Home = () => {
               <span>Create new Goal</span>
             </div>
           </div>
-          <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px]">
-            {goals.goals.slice(0, 5).map((item, key) => (
-              <GoalCheckBox key={key} item={item} />
-            ))}
+          <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px] max-h-[500px] min-h-[300px]">
+            {goals.goals.length < 0 ? (
+              goals.goals
+                .slice(0, 5)
+                .map((item, key) => <GoalCheckBox key={key} item={item} />)
+            ) : (
+              <div className="w-full h-[300px] flex text-gray-400  flex-col items-center justify-center opacity-30 hover:opacity-75 cursor-pointer ">
+                <span className="">Your don't have nay goals yet</span>
+                <span className="text-[15px]">Create Goals</span>
+                <span className="text-[30px]">
+                  <FaDropbox />
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

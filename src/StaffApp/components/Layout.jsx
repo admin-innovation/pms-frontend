@@ -8,14 +8,26 @@ import { getEmployee, fetchNotifications } from "../../backend/api";
 import { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 import { setGoals } from "../../backend/store/GoalSlice";
-import { getGoals } from "../../backend/api";
+import { getGoals, getTask } from "../../backend/api";
+import { setTasks } from "../../backend/store/TaskSlice";
 
 const Layout = () => {
   const [user, setUserData] = useState();
   const userId = Cookies.get("userId");
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    const fetchTasks = async (employee_id) => {
+      try {
+        const tasks = await getTask(employee_id);
+        if (tasks) {
+          dispatch(setTasks(tasks));
+        }
+      } catch (error) {
+        console.error("Error fetching Tasks:", error);
+      }
+    };
     const fetchEmployee = async (id) => {
       try {
         const employee = await getEmployee(userId);
@@ -30,6 +42,7 @@ const Layout = () => {
     };
     if (userId) {
       fetchEmployee(userId);
+      fetchTasks(userId);
 
       setIsLoading(false);
       if (user) {
@@ -38,7 +51,7 @@ const Layout = () => {
     }
   }, [dispatch]);
   return (
-    <div className=" bg-[#F1F4F9]   flex flex-row gap-[rem] relative w-screen min-h-screen overflow-y-scroll  overflow-x-hidden   py-[30px]   pl-[20px] pr-[60px]">
+    <div className=" flex flex-row gap-[rem] relative w-screen max-h-screen overflow-y-scroll  overflow-x-hidden   py-[30px]   pl-[20px] pr-[60px]">
       <div className="relative w-[25%]">
         <div className="fixed top-[30px]">
           <Nav />
@@ -49,7 +62,7 @@ const Layout = () => {
         <div className="w-[80%] fixed top-[10px]    h-[80px] z-100  ">
           <Header />
         </div>
-        <div className="w-full h-full relative flex mt-[50px] ">
+        <div className="w-full h-full min-h-screen relative flex mt-[50px] ">
           <Outlet />
         </div>
       </div>

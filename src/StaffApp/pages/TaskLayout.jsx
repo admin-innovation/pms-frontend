@@ -23,7 +23,7 @@ const TaskLayout = () => {
         dispatch(setTasks(tasks));
       }
     } catch (error) {
-      console.error("Error fetching employee:", error);
+      console.error("Error fetching Tasks:", error);
     }
   };
   useEffect(() => {

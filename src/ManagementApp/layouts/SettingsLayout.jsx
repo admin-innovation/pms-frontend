@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink, redirect, Navigate } from "react-router-dom";
 import { Outlet, Routes, Route } from "react-router-dom";
-import Settings from "./Settings";
-import About from "./About";
-import Support from "./Support";
+import Settings from "../pages/Settings";
+import About from "../pages/About";
+import Support from "../pages/Support";
 
 const SettingsLayout = () => {
   return (

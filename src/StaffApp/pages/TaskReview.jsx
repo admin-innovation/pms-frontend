@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Tasks } from "../data/temp";
 import People from "../components/Peopleimg";
-import { TaskReviews } from "../data/temp";
-import HoverRating from "../components/Star";
 import Minus from "../../assets/Minus.svg";
 import Check from "../../assets/Check.svg";
 import Warning from "../../assets/Warning.svg";
+import ReactStars from "react-rating-stars-component";
 import { useSelector } from "react-redux";
 
 const Modal = ({ isOpen, onClose, children }) => {
@@ -53,14 +52,14 @@ const Modal = ({ isOpen, onClose, children }) => {
             </svg>
           </button>
         </div>
-        <div className="p-4">{children}</div>
+        <div className="flex flex-col gap-5 px-[20px]">{children}</div>
       </div>
     </div>
   );
 };
 const TaskReview = () => {
   const tasks = useSelector((state) =>
-    state.tasks.tasks.filter((task) => task.submitted === true)
+    state.tasks.tasks.filter((task) => task.submitted === "true")
   );
 
   return (
@@ -81,22 +80,15 @@ const TaskReview = () => {
       </div>
 
       <div className="">
-        {TaskReviews.map((item, key) => {
-          return (
-            <TaskRow
-              title={item.title}
-              status={item.status}
-              date={item.date}
-              people={item.people}
-            />
-          );
+        {tasks.map((item, key) => {
+          return <TaskRow task={item} />;
         })}
       </div>
     </div>
   );
 };
 
-const TaskRow = ({ title, status, date, people, rating }) => {
+const TaskRow = ({ task }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -111,34 +103,31 @@ const TaskRow = ({ title, status, date, people, rating }) => {
       <div className="relative w-full flex flex-row items-center px-[10px] justify-between  bg-white pt-[10px] border-b-[1px] border-b-[#656667]/10">
         <div className="w-[35%] flex items-center gap-2.5 pb-[15px] ">
           <div className="w-[30px] ">
-            <img src={status === "Not approved" ? Warning : Check} />
+            <img src={task.status === "Not approved" ? Warning : Check} />
           </div>
           <div className="note">
-            <p>{title}</p>
+            <p>{task.title}</p>
           </div>
         </div>
         <div className="relative w-[15%] flex ">
           <div
             className={`flex  w-[100px] h-[30px] rounded-[4px] ${
-              status === "Not approved"
+              task.status === "rejected"
                 ? "bg-red-100 text-red-500"
-                : status === "Completed"
+                : task.status === "pompleted"
                 ? "bg-green-100 text-green-500"
-                : status === "Pending"
+                : task.status === "pending"
                 ? "bg-amber-100 text-amber-300"
                 : ""
             } text-center   w-[120px] mb-[25px]`}
           >
-            <p className="w-full h-full text-center">{status}</p>
+            <p className="w-full h-full text-center">{task.status}</p>
           </div>
         </div>
-
-        <div className="w-[17%]">
-          <p>{<HoverRating />}</p>
-        </div>
+        <ReactStars value={task.review.score} count={5} edit={false} />
         <div className="flex w-[10%]">
           <div className="flex ">
-            <People people={people} />
+            <People people={task.task_members} />
           </div>
         </div>
         <div className="bg-white text-center  w-[80px] mb-[23px] border-gray-500 border-[1px]  hover:bg-blue-500 hover:text-white rounded">
@@ -149,73 +138,50 @@ const TaskRow = ({ title, status, date, people, rating }) => {
         {isOpen && (
           <Modal isOpen={isOpen} onClose={closeModal}>
             <div className="flex items-center gap-3">
-              <div className="text-6xl">3.0</div>
-              <div className="text-sm">Rated by GM</div>
+              <div className="text-6xl">{task.review.score}</div>
+              <div className="w-full ">
+                <ReactStars
+                  value={task.review.score}
+                  count={5}
+                  size={30}
+                  edit={false}
+                />
+                <div className="text-sm font-bold">Rated by GM</div>
+              </div>
             </div>
 
             <div className="flex items-center justify-between mt-[35px] font-bold">
               <div className="">
-                <p>Create presentation slides for meeting with MD</p>
+                <p>{task.title}</p>
               </div>
               <div className="mr-[20px]">
-                <p>23rd Feb April 2024</p>
+                <p>{task.submitted_date}</p>
               </div>
             </div>
             <div class="mt-[10px] text-sm max-h-[82px] max-w-[750px]  break-words border-1 rounded-lg text-wrap ">
-              Lorem ipsum dolor sit amet consectetur. Orci mattis et vestibulum
-              tortor in id etiam. Eget lectus elit ullamcorper tincidunt ut eget
-              ullamcorper. Cursus purus urna fermentum lectus convallis. Mattis
-              pellentesque laoreet elit nibh tortor tempus mauris ut. Viverra
-              rhoncus quam porttitor netus gravida ut. Montes eleifend faucibus
-              duis massa mi pulvinar sollicitudin. Nec enim.
+              {task.description}
             </div>
 
-            <div className="w-[38%] h-3 bg-green-600 mt-[20px] rounded "></div>
-            <div className="flex items-center gap-6 mt-4">
-              <div className="12">
-                <p className="mt-[10px]">2/2 task completed</p>
-              </div>
-              <div className="flex ">
-                <div className="imgg">
-                  <img src="/src/assets/task/ima.svg" alt="" />
+            <div className="flex items-center gap-6 ">
+              {task.sub_tasks.map((subtask) => (
+                <div className="flex">
+                  <input
+                    type="checkbox"
+                    className="caret-[black]"
+                    checked={subtask.achieved}
+                  />
+                  <label>{subtask.title}</label>
                 </div>
-                <div className="ml-[-10px]">
-                  <img src="/src/assets/task/imaa.svg" alt="" />
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 mt-[15px]">
-              <div className="img">
-                <img src="/src/assets/taskimg/check.png" alt="" />
-              </div>
-              <div className="para">
-                <p>Create presentation slides 1-30</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="img">
-                <img src="/src/assets/taskimg/check.png" alt="" />
-              </div>
-              <div className="para">
-                <p>Create presentation slides 31-50</p>
-              </div>
+              ))}
             </div>
 
             <div className="font-bold mt-[10px]">
               <p>Comment by GM</p>
             </div>
 
-            <div className="text">
-              <p className="block px-4 py-2 mt-4 text-black rounded-md border-1 text-wrap ">
-                Lorem ipsum dolor sit amet consectetur. Orci mattis et
-                vestibulum tortor in id etiam. Eget lectus elit ullamcorper
-                tincidunt ut eget ullamcorper. Cursus purus urna fermentum
-                lectus convallis. Mattis pellentesque laoreet elit nibh tortor
-                tempus mauris ut. Viverra rhoncus quam porttitor netus gravida
-                ut. Montes eleifend faucibus duis massa mi pulvinar
-                sollicitudin. Nec enim mauris ac dui. A mi sed gravida ac
-                molestie. Imperdiet sed quis tincidunt dolor sagittis duis.
-                Ullamcorper magna sed duis odio nulla.
+            <div className="text  ">
+              <p className="block min-h-[200px] px-4 py-2 mt-4 text-black rounded-md border-1 text-wrap ">
+                {task.review.comment}
               </p>
             </div>
           </Modal>

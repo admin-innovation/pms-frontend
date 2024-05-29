@@ -6,28 +6,29 @@ import Departments from "./pages/Departments";
 import Analytics from "./pages/Analytics";
 import Error from "./pages/Error";
 import Goals from "./pages/Goals";
+import Complaints from "./pages/Complaints";
+import Evaluation from "./pages/Evaluation";
+import Vacancies from "./pages/Vacancies";
 //import Signin from "./pages/Signin";
 import Department from "./components/Department";
 import Settings from "./pages/Settings";
-import Review from "./pages/Review";
+import ReviewLayout from "./pages/ReviewLayout";
 //import HomeManagement from "./pages/HomeManagement";
 
 function AppHR() {
   return (
-    <BrowserRouter>
-      <Routes element={<Layout />}>
-        <Route element={<Layout />}>
-          <Route index path="dashboard" element={<Home />} />
-          <Route path="departments" element={<Departments />} />
-          <Route path="departments/:department_id" element={<Department />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="goals" element={<Goals />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="*" element={<Error />} />
-          <Route path="review" element={<Review/>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index path="dashboard" element={<Home />} />
+        <Route path="/departments" element={<Departments />} />
+        <Route path="/departments/:department_id" element={<Department />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/goals/*" element={<Goals />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/review/*" element={<ReviewLayout />} />
+        <Route path="*" element={<Error />} />
+      </Route>
+    </Routes>
   );
 }
 

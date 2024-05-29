@@ -25,10 +25,51 @@ const url = "http://127.0.0.1:8000"
 //   }
 // }
 
+export const getComplaints = async(employee_id)=> {
+  const token = Cookies.get("accessToken")
+  console.log(employee_id)
+  try{
+    const response =await fetch(`${url}/complaints/${employee_id}`,{
+      method:"GET",
+      // headers: {
+      //   'Authorization': `Bearer ${token}`,
+      //   'Content-Type': 'application/json'
+      // }
+    })
+    const data = await response.json()
+
+    return data.complaints
+  }
+  catch(error){
+    return error
+  }
+
+}
+
+export const createComplaint = async(user_id, data)=>{
+  console.log(data)
+  const response = await fetch(`${url}/complaints/${user_id}`,
+  {
+    method:"POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify(data)
+  })
+  if (response.ok){
+    return {status:true, msg:response.content}
+  }
+  else{
+    return {status:false, msg:response.content}
+  }
+
+}
+
 export const submitTask = async(task_id, report) =>{
  const  data={report:report}
+ const date = new Date();
   try{
-    const response = await fetch(`${url}/tasks/${task_id}?submitted=${true}`,{
+    const response = await fetch(`${url}/tasks/${task_id}?submitted=${true}&submitted_date=${date.toISOString()}&status=${"pending"}`,{
       method:'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -193,7 +234,7 @@ export const getDepartment = async(department)=>{
 
 
 export const getGoals = async(limit)=>{
-  const token = Cookies.get("accessToken")
+  const token = JSON.parse(Cookies.get("user")).token
 
     const response = await fetch(`${url}/goals?limit=${limit}`,{
       method:"GET",
@@ -205,6 +246,7 @@ export const getGoals = async(limit)=>{
     }
       )
     const data = await response.json()
+    console.log(data)
     return data
 
 
@@ -264,10 +306,10 @@ export const signinFetch = async (userLogin) => {
       }
       const userData = await response.json();
 
-      Cookies.set('accessToken', userData.token, { expires: 1, domain: '.test.me', secure: false });
-; // Expires in 1 day
-      Cookies.set('refreshToken', userData.refreshToken, { expires: 1, domain: '.test.me', secure: false }); // Expires in 7 days
-      Cookies.set("userId",userData.id,{ expires: 1, domain: '.test.me', secure: false })
+      Cookies.set('user', JSON.stringify(userData), { expires: 1, domain: '.test.me', secure: false });
+;
+      // Cookies.set('refreshToken', userData.refreshToken, { expires: 1, domain: '.test.me', secure: false }); // Expires in 7 days
+      // Cookies.set("userId",userData.id,{ expires: 1, domain: '.test.me', secure: false })
       return userData;
 
     } catch (error) {
