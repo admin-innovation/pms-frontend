@@ -18,25 +18,9 @@ import {
 } from "../../assets/index";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-// import { Departments } from "../../data/temp";
 import { getAllDepartments } from "../../backend/api";
 
 const Departments = () => {
-  // const [departments, setDepartments] = useState();
-  // useEffect(() => {
-  //   // const fetchDepartmentsData = async () => {
-  //   //   try {
-  //   //     const data = await getAllDepartments();
-  //   //     if (data) {
-  //   //       // setDepartments(data.departments);
-  //   //     }
-  //   //   } catch (error) {
-  //   //     console.error(`Error fetching Departments`, error);
-  //   //   }
-  //   // };
-  //   // fetchDepartmentsData();
-  // }, []);
-
   return (
     <div className="relative w-full h-full flex flex-col gap-[20px] mb-[20px]">
       <div className="relative w-full flex flex-col gap-[5px]">

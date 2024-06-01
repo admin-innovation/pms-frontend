@@ -16,7 +16,7 @@ const Home = () => {
   const [goalPercentage, setGoalPercentage] = useState(0);
   useEffect(() => {
     if (goals) {
-      const sum = goals.goals.reduce((total, obj) => total + obj.status, 0);
+      const sum = goals.goals?.reduce((total, obj) => total + obj.status, 0);
       setGoalPercentage(sum);
     }
   }, [goals]);
@@ -49,7 +49,7 @@ const Home = () => {
           </div>
           <div className="relative w-[1px] h-[80%] bg-[#D9D9D9] rounded-full" />
           <div className="flex flex-wrap">
-            {goals.goals.length > 0 ? (
+            {goals.goals?.length > 0 ? (
               goals.goals
                 .slice(0, 3)
                 ?.map((item, key) => (
@@ -78,7 +78,8 @@ const Home = () => {
               onClick={handleAddGoal}
             >
               <IoMdAddCircle className="text-[15px]" />{" "}
-              <span>Create new Goal</span>
+              <span>Assign Goals</span>
+              {/* Write a function to only avail this button when there are still goals */}
             </div>
           )}
         </div>
@@ -157,7 +158,7 @@ const Home = () => {
   );
 };
 
-import { updateGoals } from "../../backend/store/GoalSlice";
+import { updateGoal } from "../../backend/store/GoalSlice";
 const GoalCheckBox = ({ item }) => {
   const goal_id = item._id;
   const dispatch = useDispatch();

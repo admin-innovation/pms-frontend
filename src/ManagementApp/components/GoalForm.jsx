@@ -6,41 +6,29 @@ import ReactDom from "react-dom";
 import { useSelector } from "react-redux";
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { addGoals } from "../../backend/api";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Cookies from "js-cookie";
+
 import { v4 as uuidv4 } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 
 const GoalForm = ({ close, addGoal }) => {
-  const [dateValue, setdateValue] = useState({
-    startDate: null,
-    endDate: null,
-  });
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [deadline, setDeadline] = useState();
-  const [loading, setLoading] = useState();
-  const userId = Cookies.get("userId");
-
+  const userId = useSelector((state) => state.user.user._id);
   const handleAddGoal = async () => {
-    const deadline_date = deadline.toDate();
-    console.log(deadline_date.toISOString());
     try {
       const goal = {
         _id: uuidv4(),
         title: title,
         description: description,
-        deadline: deadline_date.toISOString(),
+        deadline: deadline,
         author: userId,
         status: 0,
       };
-
-      const response = await addGoals(goal);
-
+      await addGoals(goal);
       close();
+
+      // close();
     } catch {
       console.error("Error adding goals:", error);
     }
@@ -117,12 +105,11 @@ const GoalForm = ({ close, addGoal }) => {
             </div>
             <div
               onClick={() => {
-                notify();
                 handleAddGoal();
               }}
               className="w-[77px] h-[30px] bg-[#4D7CC1] text-center text-white rounded-[4px] text-[12px] font-[600] flex justify-center items-center cursor-pointer hover:bg-[#062b61]"
             >
-              Add goal
+              Send to Hr
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Departments } from "../../data/temp";
 import { MdOutlineMail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
@@ -13,7 +12,6 @@ const Department = () => {
   const { department_id } = useParams();
   const [employeesData, setEmployeesData] = useState(null);
   const [departmentData, setDepartmentData] = useState(null);
-  const data = Departments[department_id];
   const [staffView, setStaffView] = useState();
   const closeStaffView = () => {
     setStaffView(false);
@@ -32,7 +30,6 @@ const Department = () => {
     };
     const fetchEmployeesData = async () => {
       try {
-        // Fix this
         const data = await getEmployees(department_id);
 
         if (data) {
@@ -123,7 +120,7 @@ const Department = () => {
                 animate={{ opacity: 1, top: "0px" }}
                 exit={{ opacity: 0, top: 200 }}
                 transition={{ duration: 1, ease: "easeInOut" }}
-                className=" relative bg-white h-[700px] max-w-[30%] flex flex-col items-center justify-center rounded-[8px] pb-[10px]  "
+                className=" relative bg-white h-[700px] w-[30%] flex flex-col items-center justify-center rounded-[8px] pb-[10px]  "
               >
                 <div className="w-full h-[50%] relative flex flex-col items-start">
                   <div
@@ -235,7 +232,6 @@ const TasksView = ({ employee_id, hook }) => {
       try {
         const data = await getTask(employee_id);
         setTasks(data.tasks);
-        console.log(data.tasks);
       } catch (error) {
         console.error(
           `Error fetching task for employee ${employee_id} :`,
@@ -245,38 +241,39 @@ const TasksView = ({ employee_id, hook }) => {
     };
     fetchTasksData();
   }, [hook]);
-  if (tasks) {
-    return (
-      <div className="relative w-[90%] h-[50%] rounded-[8px] px-[8px] bg-[#98B4DB]/50 overflow-hidden  ">
-        <div className="relative w-full flex justify-between mt-[20px] items-center ">
-          <span>Task</span>
-          <div className="w-[100px] h-[30px] border-[1px] border-[#98B4DB] rounded-[4px] flex justify-between items-center text-[10px] px-[3px] py-[10px]">
-            <div
-              onClick={() => {
-                setTaskFilter("completed");
-              }}
-              className={`p-[2px] rounded-[2px] test-black font-light cursor-pointer ${
-                taskFilter === "completed"
-                  ? "bg-[#205BB1] text-white font-[700]"
-                  : ""
-              }`}
-            >
-              Completed
-            </div>
-            <div
-              onClick={() => {
-                setTaskFilter("ongoing");
-              }}
-              className={`p-[2px] rounded-[2px] test-black font-light cursor-pointer ${
-                taskFilter === "ongoing"
-                  ? "bg-[#205BB1] text-white font-[700]"
-                  : ""
-              }`}
-            >
-              Ongoing
-            </div>
+
+  return (
+    <div className="relative w-[90%] h-[50%] rounded-[8px] px-[8px] bg-[#98B4DB]/50 overflow-hidden  ">
+      <div className="relative w-full flex justify-between mt-[20px] items-center ">
+        <span>Task</span>
+        <div className="w-[100px] h-[30px] border-[1px] border-[#98B4DB] rounded-[4px] flex justify-between items-center text-[10px] px-[3px] py-[10px]">
+          <div
+            onClick={() => {
+              setTaskFilter("completed");
+            }}
+            className={`p-[2px] rounded-[2px] test-black font-light cursor-pointer ${
+              taskFilter === "completed"
+                ? "bg-[#205BB1] text-white font-[700]"
+                : ""
+            }`}
+          >
+            Completed
+          </div>
+          <div
+            onClick={() => {
+              setTaskFilter("ongoing");
+            }}
+            className={`p-[2px] rounded-[2px] test-black font-light cursor-pointer ${
+              taskFilter === "ongoing"
+                ? "bg-[#205BB1] text-white font-[700]"
+                : ""
+            }`}
+          >
+            Ongoing
           </div>
         </div>
+      </div>
+      {tasks && (
         <div className="relative h-full mb-[30px] pt-[30px]  w-full overflow-y-scroll flex flex-col gap-[20px] ">
           {tasks.map((item, key) => {
             return (
@@ -287,9 +284,9 @@ const TasksView = ({ employee_id, hook }) => {
             );
           })}
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 };
 
 const EmployeeCard = ({ employee, setStaff }) => {

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import AppManagement from "./ManagementApp/AppManagement";
-import AppStaff from "./StaffApp/AppStaff";
-import AppHR from "./HRApp/AppHR";
+// import AppStaff from "./StaffApp/AppStaff";
+// import AppHR from "./HRApp/AppHR";
 
 const MainLayout = () => {
   const [user, setUser] = useState(null);
@@ -30,10 +30,10 @@ const MainLayout = () => {
 
   return (
     <>
-      {user.role === "staff" && <AppStaff />}
+      {/* {user.role === "staff" && <AppStaff />} */}
       {user.role === "management" && <AppManagement />}
-      {user.role === "hr" && <AppHR />}
-      {user.role === "hod" && <div>HOD Component Here</div>}
+      {/* {user.role === "hr" && <AppHR />}
+      {user.role === "hod" && <div>HOD Component Here</div>} */}
     </>
   );
 };

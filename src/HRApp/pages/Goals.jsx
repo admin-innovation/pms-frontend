@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-import { goals } from "../../data/temp";
 import { IoMdAddCircle } from "react-icons/io";
 import GoalForm from "../components/GoalForm";
 import { NavLink, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import DepartmentalGoals from "./DepartmentalGoals";
 const Goals = () => {
   const [goalform, setGoalForm] = useState(false);
+  const goals = useSelector((state) => state.goals.goals);
   const handleAddGoal = (e) => {
     setGoalForm(true);
   };

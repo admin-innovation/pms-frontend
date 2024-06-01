@@ -1,9 +1,10 @@
-import React from 'react';
-import { useState } from "react";
-import { user } from "../../data/temp";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 
 const Settings = () => {
+  const user = useSelector((state) => state.user);
   const [activeView, setActiveView] = useState(1);
   const [editPersonal, setEditPersonal] = useState(true);
   const [firstname, setFirstname] = useState(user.firstname);

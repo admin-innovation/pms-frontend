@@ -19,7 +19,7 @@ function AppHR() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index path="dashboard" element={<Home />} />
+        <Route index path="/dashboard" element={<Home />} />
         <Route path="/departments" element={<Departments />} />
         <Route path="/departments/:department_id" element={<Department />} />
         <Route path="/analytics" element={<Analytics />} />

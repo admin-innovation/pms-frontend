@@ -18,15 +18,10 @@ const Header = () => {
   const closeChat = () => {
     setViewChat(!viewChat);
   };
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
+
   const notifications = useSelector((state) => state.notifications);
-  useEffect(() => {
-    setNotificationsList(notifications.notifications);
-    const New = notificationsList?.some((obj) => obj.opened === "False");
-    if (New !== newNotification) {
-      setNewNotification(New);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   if (user) {
     return (

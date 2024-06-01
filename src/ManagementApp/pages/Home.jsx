@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router";
 import { sendToHr } from "../../backend/api";
 import { FaDropbox } from "react-icons/fa6";
+import { IoIosCheckbox } from "react-icons/io";
 
 const Home = () => {
   const goals = useSelector((state) => state.goals);
@@ -16,7 +17,7 @@ const Home = () => {
   const [goalPercentage, setGoalPercentage] = useState(0);
   useEffect(() => {
     if (goals) {
-      const sum = goals.goals.reduce((total, obj) => total + obj.status, 0);
+      const sum = goals.goals?.reduce((total, obj) => total + obj.status, 0);
       setGoalPercentage(sum);
     }
   }, [goals]);
@@ -136,7 +137,7 @@ const Home = () => {
             </div>
           </div>
           <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px] max-h-[500px] min-h-[300px]">
-            {goals.goals.length < 0 ? (
+            {goals.goals.length > 0 ? (
               goals.goals
                 .slice(0, 5)
                 .map((item, key) => <GoalCheckBox key={key} item={item} />)
@@ -157,31 +158,18 @@ const Home = () => {
   );
 };
 
-import { updateGoals } from "../../backend/store/GoalSlice";
 const GoalCheckBox = ({ item }) => {
   const goal_id = item._id;
-  const dispatch = useDispatch();
-  const [update, setUpdate] = useState();
   const send = async () => {
     try {
       const data = await sendToHr(goal_id);
-      if (data) {
-        dispatch(updateGoals({ id: goal_id, date: data.date }));
-        setUpdate(true);
-        //Change the date to todays date in str
-      }
     } catch {
-      console.error("error sending to Hr");
+      toast.error("error sending to Hr");
     }
   };
   return (
     <div className="flex w-full items-center justify-between">
-      <label className=" flex items-center">
-        <input
-          className="w-[33px]"
-          type="checkbox"
-          checked={item.status === 100}
-        />
+      <label className=" flex items-center gap-4">
         <span className="text-[13px] font-[500]">{item.title}</span>
       </label>
       {!item.sent_to_hr ? (

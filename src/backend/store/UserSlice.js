@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Profiler } from 'react';
 
 const initialState = {
-  first_name: '',
-  last_name: '',
-  last_name:'',
-  id: '',
-  designation:'',
-  email: '',
-  role: '',
+  user: {
+    first_name: '',
+    last_name: '',
+    middle_name:'',
+    id: '',
+    designation:'',
+    email: '',
+    role: '',
+    profile_pic: '',
+  },
 };
 
 const userSlice = createSlice({
@@ -16,27 +18,17 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
-      const user = action.payload
-      state.user = action.payload
-      state.first_name = user.first_name;
-      state.middle_name= user.middle_name;
-      state.profile_pic = user.profile_pic
-      state.last_name = user.last_name;
-      state.id = user._id;
-      state.designation = user.designation
-      state.email = user.email;
-      state.role = user.role;
+      state.user = action.payload;
     },
-    clearUser(state) {
-      state.first_name = '';
-      state.last_name = '';
-      state.id = '';
-      state.email = '';
-      state.role = '';
+    updateUser(state, action) {
+      state.user = { ...state.user, ...action.payload };
+    },
+    deleteUser(state) {
+      state.user = initialState.user;
     },
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, updateUser, deleteUser } = userSlice.actions;
 
 export default userSlice.reducer;

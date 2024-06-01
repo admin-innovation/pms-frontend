@@ -1,58 +1,21 @@
-export const  goals =  [
-  {
-    "title": "Increase satellite coverage by 20%",
-    "status": 0,
-    "achieved": false,
-    "description": "Expand satellite coverage to reach more regions and improve communication services.",
-    "date_created": "2024-03-10",
-    "progress":30
-  },
-  {
-    "title": "Upgrade satellite technology for better performance",
-    "status": 0,
-    "achieved": true,
-    "description": "Invest in upgrading satellite technology to enhance performance, reliability, and efficiency.",
-    "date_created": "2024-03-10",
-    "progress":100
-  },
-  {
-    "title": "Enhance satellite security measures",
-    "status": 0,
-    "achieved": false,
-    "description": "Implement advanced security measures to protect satellite infrastructure from cyber threats and unauthorized access.",
-    "date_created": "2024-03-10",
-    "progress":50
-  },
-  {
-    "title": "Expand satellite services to new markets",
-    "status": 0,
-    "achieved": false,
-    "description": "Explore and enter new markets to expand the reach of satellite services and increase revenue.",
-    "date_created": "2024-03-10",
-    "progress":60
-  },
-  {
-    "title": "Improve satellite data processing and analytics",
-    "status": 0,
-    "achieved": true,
-    "description": "Enhance data processing and analytics capabilities to provide more valuable insights from satellite data.",
-    "date_created": "2024-03-10",
-    "progress":90
-  }
-]
 
-export const user={
-  "firstname": "Samiya",
-  "lastname": "Usman",
-  "department": "Technical Services",
-  "middlename": "",
-  "email": "samiyausman@example.com",
-  "role": "Engineer",
-  "designation": "Executive Director",
-  "phone_number": "+1234567890",
-  "gender":"Female",
-  "profile_img": "/samiya.png"
-}
+export const departments = [
+  { title: 'Facilities', value: 'facilities' },
+  { title: 'Marketing', value: 'marketing' },
+  { title: 'Network', value: 'network' },
+  { title: 'Innovation', value: 'innovation' },
+  { title: 'Finance', value: 'finance' },
+  { title: 'Human Resources', value: 'humanr' },
+  { title: 'Budgeting', value: 'budgeting' },
+  { title: 'Information Technology Services', value: 'infots' },
+  { title: 'Administration', value: 'administration' },
+  { title: 'Broadcast', value: 'broadcast' },
+  { title: 'Sales', value: 'sales' },
+  { title: 'Business', value: 'business' },
+  { title: 'Satellite Navigation', value: 'satnav' },
+  { title: 'Broadband', value: 'broadband' },
+  { title: 'Satellite Control', value: 'satctrl' }
+];
 
 export const TopPerformerData={
   name:"John Baptista",
