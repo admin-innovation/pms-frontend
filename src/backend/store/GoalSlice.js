@@ -12,10 +12,23 @@ const goalSlice = createSlice({
       state.goals = action.payload;
     },
     updateGoal(state, action) {
-      const { id, ...updates } = action.payload;
+      const { id, subgoals, ...updates } = action.payload;
       const goalIndex = state.goals.findIndex(goal => goal._id === id);
+
       if (goalIndex !== -1) {
-        state.goals[goalIndex] = { ...state.goals[goalIndex], ...updates };
+        // Merge subgoals if they exist in the payload
+        if (subgoals && subgoals.length > 0) {
+          state.goals[goalIndex].subgoals = [
+            ...(state.goals[goalIndex].subgoals || []),
+            ...subgoals
+          ];
+        }
+
+        // Merge other updates
+        state.goals[goalIndex] = {
+          ...state.goals[goalIndex],
+          ...updates
+        };
       }
     },
     deleteGoal(state, action) {

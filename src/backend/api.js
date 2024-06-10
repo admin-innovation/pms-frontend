@@ -110,9 +110,9 @@ export const getTask = async (employee_id, department) => {
 };
 
 // API functions for goals
-export const assignGoal = async (goal_id, department) => {
+export const addSubGoal = async (goal_id, data) => {
   try {
-    const data = { department: department };
+
     const response = await fetch(`${url}/goals/${goal_id}`, {
       method: 'PATCH',
       headers: {
@@ -123,8 +123,8 @@ export const assignGoal = async (goal_id, department) => {
     if (!response.ok) {
       handleApiError(response.statusText);
     }
-    updateStore(response.content);
-    return { status: true };
+    updateStore('goals','update',{id:goal_id,...data});
+    return  true ;
   } catch (error) {
     handleApiError(error);
   }
@@ -348,7 +348,7 @@ export const signinFetch = async (userLogin) => {
     }
     const userData = await response.json();
 
-    Cookies.set('user', JSON.stringify(userData), { expires: 1, domain: '.test.me', secure: false });
+    Cookies.set('user', JSON.stringify(userData), { expires: 1, domain: 'local.test', secure: false });
 
     return userData;
 

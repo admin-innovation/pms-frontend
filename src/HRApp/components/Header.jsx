@@ -3,7 +3,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { IoMdMore } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
-import Notifications from "../../StaffApp/components/Notifications";
+import Notifications from "./Notifications";
 import { NavLink } from "react-router-dom";
 import { CiChat1 } from "react-icons/ci";
 import { useSelector } from "react-redux";
@@ -18,15 +18,10 @@ const Header = () => {
   const closeChat = () => {
     setViewChat(!viewChat);
   };
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
+
   const notifications = useSelector((state) => state.notifications);
-  useEffect(() => {
-    setNotificationsList(notifications.notifications);
-    const New = notificationsList?.some((obj) => obj.opened === "False");
-    if (New !== newNotification) {
-      setNewNotification(New);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   if (user) {
     return (

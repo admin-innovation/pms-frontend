@@ -10,7 +10,7 @@ import { addGoals } from "../../backend/api";
 import { v4 as uuidv4 } from "uuid";
 import { ToastContainer, toast } from "react-toastify";
 
-const GoalForm = ({ close, addGoal }) => {
+const GoalForm = ({ close }) => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [deadline, setDeadline] = useState();

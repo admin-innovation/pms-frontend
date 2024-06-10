@@ -26,7 +26,7 @@ const Goals = () => {
 
   return (
     <div className=" w-full overflow-y-scroll  flex flex-col gap-[10px] mt-[30px] ">
-      {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
+      {goalform && <GoalForm close={closeGoalForm} />}
       <div className="w-full">
         <p className="font-bold text-[16px]">Organiztional Goals</p>
       </div>
@@ -35,15 +35,7 @@ const Goals = () => {
       </div>
       <div className=" w-full  bg-white rounded-[8px]  min-h-[70vh]">
         {goals?.map((goalitem, key) => {
-          return (
-            <GoalEntry
-              title={goalitem.title}
-              achieved={goalitem.achieved}
-              date_created={goalitem.date_created}
-              description={goalitem.description}
-              deadline={goalitem.deadline}
-            />
-          );
+          return <GoalEntry {...goalitem} />;
         })}
         <div className="w-full flex justify-end px-[40px] py-[30px]">
           <div
@@ -62,6 +54,8 @@ const Goals = () => {
 const GoalEntry = ({
   title,
   achieved,
+  sent_to_hr,
+  subgoal,
   date_created,
   deadline,
   description,
@@ -78,9 +72,16 @@ const GoalEntry = ({
           <label className="text-black text-[12px]">{title}</label>
         </div>
         <div className="flex items-center gap-[30px]">
-          <div className="w-[79px] h-[30px]  bg-[#EBF0F7] rounded-[4px] text-[#205BB1] font-[400] text-[12px] text-center flex items-center justify-center">
-            {}
-          </div>
+          {sent_to_hr ? (
+            <div className="w-[79px] h-[30px]  bg-[green]/30 rounded-[4px] text-[green] font-[400] text-[12px] text-center flex items-center justify-center">
+              In Progress
+            </div>
+          ) : (
+            <div className="w-[79px] h-[30px]  bg-[red]/30 rounded-[4px] text-[red] font-[400] text-[12px] text-center flex items-center justify-center">
+              Hold
+            </div>
+          )}
+
           <p className="text-[9px] font-[300] text-[black]">{date_created}</p>
           <FaRegTrashCan className="hover:text-[red] cursor-pointer" />
         </div>
@@ -95,6 +96,11 @@ const GoalEntry = ({
             className="w-full h-[200px]  bg-white rounded-[12px] drop-shadow-xl  flex flex-col  justify-between"
           >
             <div className="px-[30px] py-[20px]">{description}</div>
+            <div>
+              {subgoal?.map((item) => {
+                return <div>{item.title}</div>;
+              })}
+            </div>
             <div className="px-[30px] py-[20px]">{deadline}</div>
           </motion.div>
         )}
