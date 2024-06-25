@@ -34,6 +34,7 @@ const MainLayout = () => {
       {user.role === "management" && <AppManagement />}
       {user.role === "hr" && <AppHR />}
       {/* {user.role === "hod" && <div>HOD Component Here</div>} */}
+      {user.role == "staff" && <AppStaff />}
     </>
   );
 };

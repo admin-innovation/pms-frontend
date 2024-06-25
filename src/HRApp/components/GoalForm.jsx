@@ -58,13 +58,13 @@ const GoalForm = ({ close }) => {
 
   return ReactDom.createPortal(
     <>
-      <motion.div className="absolute inset-0 w-[100vw] h-[100vh] bg-[black]/50 z-[30] flex items-center justify-center" />
-      <div className="absolute inset-0 z-[50] w-full h-full overflow-hidden flex justify-center ">
+      <motion.div className="absolute inset-0 w-[100vw] h-[100vh] bg-[black]/50 z-[30] flex justify-center" />
+      <div className="absolute inset-0 z-[50] w-full h-full overflow-hidden flex justify-center  ">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.4, ease: easeInOut }}
-          className="relative w-[782px]   bg-[#F1F4F9] rounded-[8px] p-[20px] overflow-y-scroll"
+          className="relative w-[782px] -[200px]   bg-[#F1F4F9] rounded-[8px] p-[20px] overflow-y-scroll"
         >
           <div
             className=" w-full  flex justify-between items-center"
@@ -137,7 +137,7 @@ const GoalForm = ({ close }) => {
               transition={{ duration: 0.7, ease: "easeInOut" }}
               className="w-full flex flex-col gap-2 overflow-hidden"
             >
-              <label for="description" className="text-[16px] font-[600]">
+              <label for="description" className="text-[18px] font-bold ">
                 Add Departmental Goals
               </label>
               <form

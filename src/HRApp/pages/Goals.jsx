@@ -49,6 +49,7 @@ const Goals = () => {
       <div className=" w-full  bg-white rounded-[8px]  max-h-[80vh] overflow-y-scroll">
         <Routes>
           <Route path="departmental_goals" element={<DepartmentalGoals />} />
+          <Route path="organisational_goals" element={<DepartmentalGoals />} />
         </Routes>
       </div>
     </div>

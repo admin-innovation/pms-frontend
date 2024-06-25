@@ -74,7 +74,7 @@ const Header = () => {
               {viewChat && <Chat closeChat={setViewChat} />}
             </div>
             <div className="flex bg-[#585959] items-center px-[15px] py-[5px] rounded-[20px] relative gap-3 cursor-pointer">
-              <NavLink to="/dashboard/settings">
+              <NavLink to="settings">
                 <div className="flex gap-2 items-center justify-center ">
                   <img
                     src={user.profile_pic}

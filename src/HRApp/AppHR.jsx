@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Departments from "./pages/Departments";
@@ -22,11 +22,11 @@ function AppHR() {
         <Route index path="/dashboard" element={<Home />} />
         <Route path="/departments" element={<Departments />} />
         <Route path="/departments/:department_id" element={<Department />} />
-        <Route path="/analytics" element={<Analytics />} />
+        {/* <Route path="/analytics" element={<Analytics />} /> */}
         <Route path="/goals/*" element={<Goals />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/review/*" element={<ReviewLayout />} />
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Route>
     </Routes>
   );

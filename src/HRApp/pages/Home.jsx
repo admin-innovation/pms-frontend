@@ -133,7 +133,7 @@ const Home = () => {
               onClick={handleAddGoal}
             >
               <IoMdAddCircle className="text-[25px]" />{" "}
-              <span>Create new Goal</span>
+              <span>Create Departmental Goals</span>
             </div>
           </div>
           <div className="px-[20px] w-full flex flex-col gap-5 pb-[20px] max-h-[500px] min-h-[300px]">

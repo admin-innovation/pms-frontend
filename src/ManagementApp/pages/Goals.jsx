@@ -33,7 +33,7 @@ const Goals = () => {
       <div className="w-full h-[45px]  bg-[white] rounded-[5px] flex  text-center">
         {/* Add Search FIlters, short-term,long-term,middle-term, department */}
       </div>
-      <div className=" w-full  bg-white rounded-[8px]  min-h-[70vh]">
+      <div className=" w-full  bg-white rounded-[8px]  max-h-[70vh] overflow-y-scroll ">
         {goals?.map((goalitem, key) => {
           return <GoalEntry {...goalitem} />;
         })}

@@ -11,7 +11,8 @@ import { setUser } from "../../backend/store/UserSlice";
 import { useEffect } from "react";
 
 const Settings = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
+
   const [key, setKey] = useState(0);
   const dispatch = useDispatch();
   const [activeView, setActiveView] = useState(1);
@@ -114,7 +115,7 @@ const Settings = () => {
                 First Name
               </label>
               <div className="decoration-none  text-[16px] font-bold outline-none dec">
-                {firstname}
+                {user.first_name}
               </div>
             </span>
             <span className="flex flex-col">
@@ -122,7 +123,7 @@ const Settings = () => {
                 Middle Name
               </label>
               <div className="decoration-none  text-[16px] font-bold">
-                {middlename}
+                {user.middle_name}
               </div>
             </span>
             <span className="flex flex-col">
@@ -130,7 +131,7 @@ const Settings = () => {
                 Last Name
               </label>
               <div className="decoration-none  text-[16px] font-bold">
-                {lastname}
+                {user.last_name}
               </div>
             </span>
             <span className="flex flex-col">
@@ -138,7 +139,7 @@ const Settings = () => {
                 Email Address
               </label>
               <div className="decoration-none  text-[16px] font-bold">
-                {email}
+                {user.email}
               </div>
             </span>
             <span className="flex flex-col">
