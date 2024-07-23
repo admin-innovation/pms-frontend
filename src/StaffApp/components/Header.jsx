@@ -11,16 +11,21 @@ import { useState, useEffect, useRef } from "react";
 import Chat from "./Chat";
 
 const Header = () => {
-  const [notifcations, setNotifications] = useState(null);
+  const [notificationsList, setNotificationsList] = useState(null);
   const [viewNotifications, setViewNotifications] = useState(false);
   const [viewChat, setViewChat] = useState(false);
+  const [newNotification, setNewNotification] = useState(false);
   const closeChat = () => {
     setViewChat(!viewChat);
   };
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
+
+  const notifications = useSelector((state) => state.notifications);
+  useEffect(() => {}, []);
+
   if (user) {
     return (
-      <div className="h-full ">
+      <div className="h-full z-[10000] ">
         <div className="w-full flex items-center justify-center  gap-[20px] ">
           <p className="text-[16px] font-[700]">
             Welcome Back, {user.first_name} {user.last_name}
@@ -43,14 +48,18 @@ const Header = () => {
               }}
             >
               {viewNotifications && (
-                <Notifications notifcations={notifcations} />
+                <Notifications notifcations={notificationsList} />
               )}
               <span className="text-[30px] text-slate-700 ">
                 <IoIosNotificationsOutline />
               </span>
-              <span className="text-[red] absolute text-[10px] right-[5px] top-[4px] ">
-                <GoDotFill className="" />
-              </span>
+              {newNotification ? (
+                <span className="text-[red] absolute text-[10px] right-[5px] top-[4px] ">
+                  <GoDotFill className="" />
+                </span>
+              ) : (
+                ""
+              )}
             </div>
             <div className="relative flex cursor-pointer">
               <span

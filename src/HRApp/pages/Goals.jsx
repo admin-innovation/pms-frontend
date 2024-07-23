@@ -4,7 +4,9 @@ import { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import GoalForm from "../components/GoalForm";
 import { NavLink, Route, Routes } from "react-router-dom";
+import OrganizationalGoals from "./OrganizationalGoals";
 import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import DepartmentalGoals from "./DepartmentalGoals";
 const Goals = () => {
   const [goalform, setGoalForm] = useState(false);
@@ -17,9 +19,7 @@ const Goals = () => {
   const closeGoalForm = () => {
     setGoalForm(false);
   };
-  const handleButtonClick = (buttonName) => {
-    setActiveView(buttonName);
-  };
+
   return (
     <div className=" w-full flex flex-col gap-[10px] mt-[30px] ">
       {goalform && <GoalForm close={closeGoalForm} addGoal={setGoals} />}
@@ -49,7 +49,11 @@ const Goals = () => {
       <div className=" w-full  bg-white rounded-[8px]  max-h-[80vh] overflow-y-scroll">
         <Routes>
           <Route path="departmental_goals" element={<DepartmentalGoals />} />
-          <Route path="organisational_goals" element={<DepartmentalGoals />} />
+          <Route
+            path="organisational_goals"
+            element={<OrganizationalGoals />}
+          />
+          <Route path="" element={<Navigate to="organisational_goals" />} />
         </Routes>
       </div>
     </div>

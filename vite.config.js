@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "127.0.0.1", // Change to 'local.test'
-    port: 5173,
+
     cors: true,
   },
   build: {

@@ -1,167 +1,171 @@
 import React from "react";
-import { useState, useRef } from "react";
-// import { user } from "../../data/temp";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { user } from "../data/temp";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { IoCameraOutline } from "react-icons/io5";
-import { uploadProfilePic } from "../../backend/api";
-import { formControlClasses } from "@mui/base";
-import { getEmployee } from "../../backend/api";
-import { setUser } from "../../backend/store/UserSlice";
-import { useEffect } from "react";
 
 const Settings = () => {
-  const user = useSelector((state) => state.user);
-  const [key, setKey] = useState(0);
-  const dispatch = useDispatch();
-  const [activeView, setActiveView] = useState(1);
-  const [firstname, setFirstname] = useState(user.first_name);
-  const [middlename, setMiddleName] = useState(user.middle_name);
-  const [lastname, setLastName] = useState(user.last_name);
-  const [email, setEmail] = useState(user.email);
-  const [profile_pic, setProfilePic] = useState(user.profile_pic);
-  const [phone, setPhone] = useState(user.phone);
-  const [gender, setGender] = useState(user.gender);
-  const fileInputRef = useRef(null);
+	const [activeView, setActiveView] = useState("account");
+	const [editPersonal, setEditPersonal] = useState(true);
+	const [firstname, setFirstname] = useState(user.firstname);
+	const [middlename, setMiddleName] = useState(user.middlename);
+	const [lastname, setLastName] = useState(user.lastname);
+	const [email, setEmail] = useState(user.email);
+	const [address, setAddress] = useState(user.address);
+	const [phone, setPhone] = useState(user.phone);
+	const [gender, setGender] = useState(user.gender);
 
-  const handleDivClick = () => {
-    fileInputRef.current.click();
-  };
-  useEffect(() => {
-    console.log("refreshed");
-  }, [dispatch]);
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const upload = async (user, file) => {
-      //set loading state to true
-      try {
-        const data = await uploadProfilePic(user.id, file);
-        // Recall the user data api
-        const fetchEmployee = async () => {
-          try {
-            const employee = await getEmployee(user.id);
-
-            dispatch(setUser(employee));
-          } catch (error) {
-            console.error("Error fetching employee:", error);
-          }
-        };
-        if (data.msg == "ok") {
-          fetchEmployee();
-          //setloading state to false
-        }
-
-        return data;
-      } catch (error) {
-        console.error("this shit happened:", error);
-      }
-    };
-    upload(user, file);
-  };
-
-  const handleEditPersonal = () => {
-    setEditPersonal(false);
-  };
-
-  return (
-    <div className="w-full  flex flex-col gap-6 mt-[50px] ">
-      <div className="bg-white w-full py-[30px] rounded-[5px] flex flex-col items-center justify-center gap-[30px] ">
-        <div className=" w-[90%]  border border-[#ECE9E9] rounded-[8px] flex px-[50px] py-[10px] items-center gap-[20px]">
-          <div
-            className=" group relative size-[120px] rounded-[50%] bg-slate-400 object-cover overflow-hidden"
-            onClick={handleDivClick}
-          >
-            <img
-              src={profile_pic}
-              // src="https://storage.googleapis.com/pms-dev-faac9.appspot.com/ProfilePictures/8q5XNvw0z3gvdG8SD6G9UyX7Gz52.jpg"
-              alt="Profile"
-              className="object-cover w-full h-full"
-              style={{ objectFit: "cover" }}
-              accept="image/*"
-            />
-            <input
-              type="file"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              onChange={handleFileChange}
-            />
-            <div className="group-hover:opacity-[1] w-full h-full opacity-0 bg-[black]/10 absolute z-[100] inset-0 flex items-center  justify-center text-[70px] text-[gray]/50">
-              <IoCameraOutline />
-            </div>
-          </div>
-          <div className="w-full flex flex-col gap-1">
-            <span className="font-[700] text-[18px] text-black">
-              {user.first_name} {user.middle_name} {user.last_name}
-            </span>
-            <span className="font-[600] text-[#666667] text-[16px]">
-              {user.designation}
-            </span>
-            <span className="font-500] text-[#666667] text-[14px]">
-              {user.department}
-            </span>
-          </div>
-        </div>
-        <div
-          onClick={handleEditPersonal}
-          className=" relative rounded-[8px] border-[#ECE9E9] w-[90%]   border  pt-[30px] pb-[90px] flex flex-col gap-[20px] px-[50px]"
-        >
-          <p className="text-black text-[20px] font-bold">
-            Personal Information
-          </p>
-          <div className="w-full flex flex-wrap gap-x-[90px] gap-y-[30px] ">
-            <span className="flex flex-col">
-              <label className="text-[14px] text-[#666667] font-light">
-                First Name
-              </label>
-              <div className="decoration-none  text-[16px] font-bold outline-none dec">
-                {firstname}
-              </div>
-            </span>
-            <span className="flex flex-col">
-              <label className="text-[14px] text-[#666667] font-light">
-                Middle Name
-              </label>
-              <div className="decoration-none  text-[16px] font-bold">
-                {middlename}
-              </div>
-            </span>
-            <span className="flex flex-col">
-              <label className="text-[14px] text-[#666667] font-light">
-                Last Name
-              </label>
-              <div className="decoration-none  text-[16px] font-bold">
-                {lastname}
-              </div>
-            </span>
-            <span className="flex flex-col">
-              <label className="text-[14px] text-[#666667] font-light">
-                Email Address
-              </label>
-              <div className="decoration-none  text-[16px] font-bold">
-                {email}
-              </div>
-            </span>
-            <span className="flex flex-col">
-              <label className="text-[14px] text-[#666667] font-light">
-                Phone
-              </label>
-              <div className="decoration-none  text-[16px] font-bold">
-                {phone}
-              </div>
-            </span>
-            <span className="flex flex-col">
-              <label className="text-[14px] text-[#666667] font-light">
-                Gender
-              </label>
-              <div className="decoration-none  text-[16px] font-bold">
-                {gender}
-              </div>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+	const handleEditPersonal = () => {
+		setEditPersonal(false);
+	};
+	const handleButtonClick = (buttonName) => {
+		setActiveView(buttonName);
+	};
+	return (
+		<div className="w-full  flex flex-col gap-6 mt-[50px] ">
+			<div className="w-full h-[45px]  bg-[white] rounded-[5px] flex  text-center">
+				<button
+					className={`text-[#205BB1] text-[16px] font-[700] flex-1 rounded-[5px] ${
+						activeView === "account"
+							? "bg-[#1D53A117]/10 w-[30%]  relative   shadow-[black]/10"
+							: ""
+					}`}
+					onClick={() => {
+						handleButtonClick("account");
+					}}>
+					Account
+				</button>
+				<button
+					className={`text-[#205BB1] text-[16px] font-[700] flex-1  rounded-[5px]  ${
+						activeView === "help_and_support"
+							? "bg-[#1D53A117]/10 w-[30%]  relative  shadow-md shadow-[black]/10"
+							: ""
+					}`}
+					onClick={() => {
+						handleButtonClick("help_and_support");
+					}}>
+					Help and Support
+				</button>
+				<button
+					className={`text-[#205BB1] text-[16px] font-[700] flex-1  rounded-[5px]  ${
+						activeView === "about" ? "bg-[#1D53A117]/10 shadow-[black]/10" : ""
+					}`}
+					onClick={() => {
+						handleButtonClick("about");
+					}}>
+					About
+				</button>
+			</div>
+			<div className="bg-white w-full py-[30px] rounded-[5px] flex flex-col items-center justify-center gap-[30px] ">
+				<div className=" w-[90%]  border border-[#ECE9E9] rounded-[8px] flex px-[50px] py-[10px] items-center gap-[20px]">
+					<div className="w-[120px] h-[120px] rounded-[50%] bg-slate-400"></div>
+					<div className="flex flex-col w-full gap-1">
+						<span className="font-[700] text-[18px] text-black">
+							{user.firstname} {user.middlename} {user.lastname}
+						</span>
+						<span className="font-[600] text-[#666667] text-[16px]">
+							{user.designation}
+						</span>
+						<span className="font-500] text-[#666667] text-[14px]">
+							{user.department}
+						</span>
+					</div>
+				</div>
+				<div
+					onClick={handleEditPersonal}
+					className=" relative rounded-[8px] border-[#ECE9E9] w-[90%]   border py-[90px] px-[50px]">
+					<div className="absolute top-5 right-10 border-[2px] rounded-[20px] border-[#ECE9E9] text-[#ECE9E9] hover:text-[#cccbcb]  hover:border-[#cccbcb] w-[90px] h-[40px] flex items-center text-center justify-center gap-2 cursor-pointer">
+						<span>Edit</span>
+						<span className="text-[20px]">
+							<MdOutlineModeEdit />
+						</span>
+					</div>
+					<p className="text-black text-[20px] font-bold">
+						Personal Information
+					</p>
+					<div className="w-full flex flex-wrap gap-x-[90px] gap-y-[30px] ">
+						<span className="flex flex-col">
+							<label className="text-[14px] text-[#666667] font-light">
+								First Name
+							</label>
+							<input
+								value={firstname}
+								onChange={(e) => {
+									setFirstname(e.currentTarget.value);
+								}}
+								className="decoration-none  text-[16px] font-bold outline-none dec"
+								// disabled={editPersonal}
+							/>
+						</span>
+						<span className="flex flex-col">
+							<label className="text-[14px] text-[#666667] font-light">
+								Middle Name
+							</label>
+							<input
+								value={middlename}
+								className="decoration-none  text-[16px] font-bold"
+								onChange={(e) => {
+									setMiddleName(e.currentTarget.value);
+								}}
+								disabled={editPersonal}
+							/>
+						</span>
+						<span className="flex flex-col">
+							<label className="text-[14px] text-[#666667] font-light">
+								Last Name
+							</label>
+							<input
+								value={lastname}
+								className="decoration-none  text-[16px] font-bold"
+								disabled={editPersonal}
+								onChange={(e) => {
+									setLastName(e.currentTarget.value);
+								}}
+							/>
+						</span>
+						<span className="flex flex-col">
+							<label className="text-[14px] text-[#666667] font-light">
+								Email Address
+							</label>
+							<input
+								value={email}
+								className="decoration-none  text-[16px] font-bold"
+								disabled={editPersonal}
+								onChange={(e) => {
+									setEmail(e.currentTarget.value);
+								}}
+							/>
+						</span>
+						<span className="flex flex-col">
+							<label className="text-[14px] text-[#666667] font-light">
+								Phone
+							</label>
+							<input
+								value={phone}
+								className="decoration-none  text-[16px] font-bold"
+								disabled={editPersonal}
+								onChange={(e) => {
+									setPhone(e.currentTarget.value);
+								}}
+							/>
+						</span>
+						<span className="flex flex-col">
+							<label className="text-[14px] text-[#666667] font-light">
+								Gender
+							</label>
+							<input
+								value={gender}
+								className="decoration-none  text-[16px] font-bold"
+								onChange={(e) => {
+									setGender(e.currentTarget.value);
+								}}
+								disabled={editPersonal}
+							/>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Settings;

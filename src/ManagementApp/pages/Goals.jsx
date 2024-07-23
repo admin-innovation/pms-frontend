@@ -25,15 +25,13 @@ const Goals = () => {
   };
 
   return (
-    <div className=" w-full overflow-y-scroll  flex flex-col gap-[10px] mt-[30px] ">
+    <div className=" w-full overflow-y-scroll  flex flex-col gap-[10px] ">
       {goalform && <GoalForm close={closeGoalForm} />}
       <div className="w-full">
         <p className="font-bold text-[16px]">Organiztional Goals</p>
       </div>
-      <div className="w-full h-[45px]  bg-[white] rounded-[5px] flex  text-center">
-        {/* Add Search FIlters, short-term,long-term,middle-term, department */}
-      </div>
-      <div className=" w-full  bg-white rounded-[8px]  max-h-[70vh] overflow-y-scroll ">
+
+      <div className=" w-full  bg-white rounded-[8px]  max-h-[70vh] overflow-y-scroll py-[20px] ">
         {goals?.map((goalitem, key) => {
           return <GoalEntry {...goalitem} />;
         })}
@@ -67,7 +65,7 @@ const GoalEntry = ({
         setDropdown(!dropdown);
       }}
     >
-      <div className="w-full h-[40px] flex justify-between px-[40px] hover:bg-[#f8f8ff]  transition-all duration-200 ease-in-out my-[20px]">
+      <div className="w-full h-[40px] flex justify-between px-[40px] hover:bg-[#f8f8ff]  transition-all duration-200 ease-in-out ">
         <div className=" flex gap-3 items-center">
           <label className="text-black text-[12px]">{title}</label>
         </div>

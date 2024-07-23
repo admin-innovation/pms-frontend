@@ -9,9 +9,12 @@ import Cookies from "js-cookie";
 import { getGoals } from "../../backend/api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Windows } from "iconsax-react";
 
 const Layout = ({ children }) => {
   const [employee, setEmployeeData] = useState();
+  const contentRef = useRef(null);
+  const [isBlurred, setIsBlurred] = useState(false);
 
   useEffect(() => {
     const userId = JSON.parse(Cookies.get("user")).id;
@@ -21,10 +24,26 @@ const Layout = ({ children }) => {
       await getGoals(1000);
       await getNotifications(userId);
     };
-    console.log(userId);
+
     if (userId) {
       dataLoad();
     }
+  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contentRef.current.scrollTop > 80) {
+        setIsBlurred(true);
+      } else {
+        setIsBlurred(false);
+      }
+    };
+
+    const contentElement = contentRef.current;
+    contentElement.addEventListener("scroll", handleScroll);
+
+    return () => {
+      contentElement.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -38,11 +57,20 @@ const Layout = ({ children }) => {
           </div>
         </div>
 
-        <div className="relative  w-full min-h-screen overflow-y-scroll   flex flex-col items-center justify-center ">
-          <div className="w-[80%] fixed top-[10px]    h-[80px] z-100  ">
+        <div
+          id="content"
+          ref={contentRef}
+          className="relative  w-full max-h-screen bg-blur overflow-y-scroll   flex flex-col gap-10  items-center justify-center "
+        >
+          <div
+            className={`fixed top-[10px] w-[80%] h-[80px] z-[100] ${
+              isBlurred ? "backdrop-blur-lg" : ""
+            }`}
+          >
+            {/* <div className="w-full h-full absolute backdrop-blur-lg" /> */}
             <Header />
           </div>
-          <div className="w-full h-full relative flex min-h-screen mt-[50px] ">
+          <div className="relative z-[50] w-full h-full relative flex min-h-screen mt-[160px]  ">
             <Outlet />
           </div>
         </div>

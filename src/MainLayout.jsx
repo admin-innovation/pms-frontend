@@ -4,12 +4,14 @@ import Cookies from "js-cookie";
 import AppManagement from "./ManagementApp/AppManagement";
 import AppStaff from "./StaffApp/AppStaff";
 import AppHR from "./HRApp/AppHR";
+import AppHOD from "./HODApp/AppHOD";
 
 const MainLayout = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // console.log(user);
     const userCookie = Cookies.get("user");
     if (userCookie) {
       try {
@@ -30,10 +32,10 @@ const MainLayout = () => {
 
   return (
     <>
-      {/* {user.role === "staff" && <AppStaff />} */}
+      {/* {user.role === "staff" && <div>"What is this"</div>} */}
       {user.role === "management" && <AppManagement />}
       {user.role === "hr" && <AppHR />}
-      {/* {user.role === "hod" && <div>HOD Component Here</div>} */}
+      {user.role === "hod" && <AppHOD />}
       {user.role == "staff" && <AppStaff />}
     </>
   );

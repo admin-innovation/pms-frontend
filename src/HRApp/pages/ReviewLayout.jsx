@@ -3,6 +3,8 @@ import { useState } from "react";
 import Complaints from "./Complaints";
 import Evaluation from "./Evaluation";
 import Vacancies from "./Vacancies";
+import PeerReview from "./PeerReview";
+import SelfAprraisal from "./SelfAprraisal";
 import { Link, NavLink, Route, Routes, Navigate } from "react-router-dom";
 
 const ReviewLayout = () => {
@@ -19,6 +21,10 @@ const ReviewLayout = () => {
     {
       title: "Performance Evaluation",
       value: "performance_evaluation",
+    },
+    {
+      title: "Complaints",
+      value: "complaint",
     },
     {
       title: "Vacancies",
@@ -46,11 +52,12 @@ const ReviewLayout = () => {
       </div>
       <div>
         <Routes>
-          <Route path="self_appraisal" element={<Complaints />} />
-          <Route path="peer_review" element={<Evaluation />} />
+          <Route path="self_appraisal" element={<SelfAprraisal />} />
+          <Route path="peer_review" element={<PeerReview />} />
           <Route path="vacancies" element={<Vacancies />} />
           <Route path="performance_evaluation" element={<Evaluation />} />
-          <Route path="/" element={<Navigate to="complaints" />} />
+          <Route path="complaints" element={<Complaints />} />
+          <Route path="/" element={<Navigate to="self_appraisal" />} />
         </Routes>
       </div>
     </div>

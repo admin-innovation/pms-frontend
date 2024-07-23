@@ -25,10 +25,10 @@ const Header = () => {
 
   if (user) {
     return (
-      <div className="h-full z-[10000] ">
+      <div className="h-full  ">
         <div className="w-full flex items-center justify-center  gap-[20px] ">
           <p className="text-[16px] font-[700]">
-            Welcome Back, {user.first_name} {user.last_name}
+            Welcome Back ✨✨, {user.first_name} {user.last_name}
           </p>
           <div className="w-[40%] h-[30px] flex bg-[white] items-center rounded-[30px] ">
             <span className="text-[20px] pl-[20px] pr-[5px] text-slate-400">

@@ -159,32 +159,32 @@ const Home = () => {
 };
 
 import { updateGoal } from "../../backend/store/GoalSlice";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { IoCheckbox } from "react-icons/io5";
+
 const GoalCheckBox = ({ item }) => {
   const goal_id = item._id;
-  const dispatch = useDispatch();
-  const [update, setUpdate] = useState();
-  const send = async () => {
-    try {
-      const data = await sendToHr(goal_id);
-      if (data) {
-        dispatch(updateGoals({ id: goal_id, date: data.date }));
-        setUpdate(true);
-        //Change the date to todays date in str
-      }
-    } catch {
-      console.error("error sending to Hr");
-    }
+  const navigate = useNavigate();
+  const view = () => {
+    navigate("/goals");
   };
+
   return (
     <div className="flex w-full items-center justify-between">
-      <label className=" flex items-center">
-        <input className="w-[33px]" type="checkbox" checked={item.approved} />
+      <label className=" flex items-center gap-4">
+        <span className="text-[black]">
+          {item.approved ? (
+            <IoCheckbox className="text-[#4D7CC1] text-[20px]" />
+          ) : (
+            <MdCheckBoxOutlineBlank />
+          )}
+        </span>
         <span className="text-[13px] font-[500]">{item.title}</span>
       </label>
 
       <span
         onClick={() => {
-          send();
+          view();
         }}
         className="border-[1px] border-solid border-[#17417E] w-[80px] flex items-center justify-center text-[12px] font-[600] text-[#17417E] py-[3px] rounded-[4px] hover:bg-[#e0ecf2] cursor-pointer"
       >

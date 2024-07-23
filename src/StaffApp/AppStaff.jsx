@@ -1,25 +1,27 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Task from "./pages/Task";
 import Analytics from "./pages/Analytics";
 import Error from "./pages/Error";
-
-import SettingsLayout from "./pages/SettingsLayout";
-import TaskLayout from "./pages/TaskLayout";
-import ReportsLayout from "./pages/ReportsLayout";
+import Review from "./pages/Review";
+import Department from "./components/Department";
+import Settings from "./pages/Settings";
+import Complaints from "./pages/Complaints";
 
 function AppStaff() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="dashboard" index element={<Home />} />
-        <Route path="tasks/*" element={<TaskLayout />} />
+        <Route path="dashboard" element={<Home />} />
+        <Route path="task/*" element={<Task />} />
+        <Route path="departments/:pathId" element={<Department />} />
         <Route path="analytics" element={<Analytics />} />
-        <Route path="reports/*" element={<ReportsLayout />} />
-        <Route path="settings/*" element={<SettingsLayout />} />
-        <Route path="*" element={<Error />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="review/*" element={<Review />} />
+        <Route path="complaints" element={<Complaints />} />
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Route>
     </Routes>
   );

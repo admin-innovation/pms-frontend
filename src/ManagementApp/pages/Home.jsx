@@ -10,13 +10,17 @@ import { redirect, useNavigate } from "react-router";
 import { sendToHr } from "../../backend/api";
 import { FaDropbox } from "react-icons/fa6";
 import { IoIosCheckbox } from "react-icons/io";
+// import loadingAnimation from
 
 const Home = () => {
   const goals = useSelector((state) => state.goals);
+  useEffect(() => {
+    console.log("Goals state updated:", goals);
+  }, [goals]);
   const [goalform, setGoalForm] = useState(false);
   const [goalPercentage, setGoalPercentage] = useState(0);
   useEffect(() => {
-    if (goals) {
+    if (goals.goals.length > 0) {
       const sum = goals.goals?.reduce((total, obj) => total + obj.status, 0);
       setGoalPercentage(sum);
     }
@@ -158,11 +162,21 @@ const Home = () => {
   );
 };
 
+import { format, parseISO } from "date-fns";
+
 const GoalCheckBox = ({ item }) => {
   const goal_id = item._id;
+  const [loading, setLoading] = useState(false);
+  const formattedDate = (date) => {
+    return format(parseISO(date), "dd-MM-yyyy");
+  };
   const send = async () => {
     try {
+      setLoading(true);
       const data = await sendToHr(goal_id);
+      if (data.status) {
+        setLoading(false);
+      }
     } catch {
       toast.error("error sending to Hr");
     }
@@ -174,15 +188,49 @@ const GoalCheckBox = ({ item }) => {
       </label>
       {!item.sent_to_hr ? (
         <span
-          onClick={() => {
-            send();
-          }}
+          onClick={send}
           className="border-[1px] border-solid border-[#17417E] w-[80px] flex items-center justify-center text-[12px] font-[600] text-[#17417E] py-[3px] rounded-[4px] hover:bg-[#e0ecf2] cursor-pointer"
         >
-          Send to HR
+          {!loading ? (
+            "Send to HR"
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid"
+              width="20"
+              height="20"
+              style={{
+                shapeRendering: "auto",
+                display: "block",
+                background: "transparent",
+              }}
+            >
+              <circle
+                strokeDasharray="164.93361431346415 56.97787143782138"
+                r="35"
+                strokeWidth="10"
+                stroke="#17417E"
+                fill="none"
+                cy="50"
+                cx="50"
+              >
+                <animateTransform
+                  keyTimes="0;1"
+                  values="0 50 50;360 50 50"
+                  dur="1s"
+                  repeatCount="indefinite"
+                  type="rotate"
+                  attributeName="transform"
+                />
+              </circle>
+            </svg>
+          )}
         </span>
       ) : (
-        <span className="text-[9px] font-[300]">{item.date_sent_to_hr}</span>
+        <span className="text-[12px] font-medium">
+          {formattedDate(item.date_sent_to_hr)}
+        </span>
       )}
     </div>
   );

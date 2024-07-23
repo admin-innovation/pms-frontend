@@ -22,7 +22,7 @@ import { getAllDepartments } from "../../backend/api";
 
 const Departments = () => {
   return (
-    <div className="relative w-full h-full flex flex-col gap-[20px] mb-[20px]">
+    <div className="relative w-full flex flex-col gap-[20px]">
       <div className="relative w-full flex flex-col gap-[5px]">
         <div className="relative w-full h-[50px] rounded-[8px] font-[700px] bg-[#BACCE7] flex items-center">
           <p className="ml-[30px] text-[23px] font-bold">
@@ -45,7 +45,7 @@ const Departments = () => {
         </div>
       </div>
 
-      <div className="relative w-full flex flex-col gap-[5px]">
+      <div className="relative w-full h-full  flex flex-col gap-[5px]">
         <div className="relative w-full h-[50px] rounded-[8px] font-[700px] bg-[#BACCE7] flex items-center">
           <p className="ml-[30px] text-[23px] font-bold">
             Directorate of Technical Services
@@ -79,7 +79,7 @@ const Departments = () => {
         </div>
       </div>
 
-      <div className="relative w-full flex flex-col gap-[5px]">
+      <div className="relative w-full  h-full flex flex-col gap-[5px]">
         <div className="relative w-full h-[50px] rounded-[8px] font-[700px] bg-[#BACCE7] flex items-center">
           <p className="ml-[30px] text-[23px] font-bold">
             Directorate of Marketing and Business Development

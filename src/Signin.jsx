@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect } from "react";
 
 import Image from "./assets/log-in.png";
 import Logo from "./assets/logo.png";
@@ -9,31 +9,25 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./backend/store/UserSlice";
 import { signinFetch } from "./backend/api";
 import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const domain = window.location.host;
+
   const handleClick = async () => {
     setLoading(true);
     const userLogin = { staff_id: staffId, password: pass };
     try {
       const userData = await signinFetch(userLogin);
       setLoading(false);
-      //How about tokens
+
       if (userData) {
         window.location.href = `http://${domain}/`;
       }
-      // if (userData.role === "management") {
-      //   window.location.href = `http://${domain}/management`;
-      // }
-      // if (userData.role === "hod") {
-      //   window.location.href = `http://${domain}/hod`;
-      // }
-      // if (userData.role === "hr") {
-      //   window.location.href = `http://${domain}/hr`;
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +41,7 @@ const Signin = () => {
       className="flex w-[100%]  h-screen overflow-hidden bg-[white] flex-wrap bg-cover bg-no-repeat items-center justify-center"
       style={{ backgroundImage: `url(${Image})` }}
     >
+      <ToastContainer />
       <div className="w-full flex flex-col gap-[20px]  h-full  items-center justify-center  ">
         <div className="w-[50%] items-center justify-center flex flex-col   ">
           <img src={Logo} className="object-contain" />
